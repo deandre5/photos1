@@ -4,365 +4,405 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mi Pulguita - Una Carta de Amor</title>
+    <title>Cartas al amor de mi vida</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link
         href="https://fonts.googleapis.com/css2?family=Caveat:wght@400;700&family=Dancing+Script:wght@400;700&display=swap"
         rel="stylesheet">
     <style>
-        /* Estilo personalizado para el cuerpo y el contenedor de la carta */
+        /* Estilos generales del cuerpo */
         body {
+            font-family: 'Inter', sans-serif;
             background-color: #f2e8d9;
-            /* Color beige más cálido para simular papel antiguo */
+            /* Color beige más cálido para simular papel antiguo, similar a las cartas */
             background-image: url('https://www.transparenttextures.com/patterns/cream-paper.png');
-            /* Textura de papel más pronunciada para el fondo del body */
+            /* Textura de papel más pronunciada para el fondo del body, similar a las cartas */
             display: flex;
+            flex-direction: column;
             justify-content: center;
             align-items: center;
             min-height: 100vh;
-            /* Asegura que ocupe al menos la altura de la ventana */
-            padding: 10px;
-            /* Espaciado reducido alrededor de la carta */
-            overflow: hidden;
-            /* Evita el scroll en el body */
+            margin: 0;
+            padding: 1rem;
             box-sizing: border-box;
+            overflow-x: hidden;
+            /* Evita el scroll horizontal */
         }
 
-        /* Estilo para el contenedor principal de la carta */
-        .letter-container {
+        .envelope-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            /* Ajuste automático de columnas */
+            gap: 1rem;
+            /* Espacio entre sobres responsive */
             background-color: #fffaf0;
-            /* Blanco crema más suave para el papel de la carta */
-            background-image: url('https://www.transparenttextures.com/patterns/paper-fibers.png');
-            /* Textura de papel sutil */
-            border: 2px solid #c2a88a;
-            /* Borde más pronunciado y antiguo */
-            box-shadow: 0 12px 25px rgba(0, 0, 0, 0.25);
-            /* Sombra más profunda para darle más relieve */
+            /* Blanco crema más suave para el fondo del contenedor, similar al papel de carta */
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            /* Sombra para el contenedor principal */
+            max-width: 1200px;
+            width: 100%;
+            padding: 1rem;
+            /* Padding responsive */
+        }
+
+        /* En pantallas medianas (md:), 3 columnas */
+        @media (min-width: 768px) {
+            .envelope-container {
+                grid-template-columns: repeat(3, minmax(0, 1fr));
+                gap: 1.5rem;
+                /* Aumenta el espacio en pantallas medianas */
+            }
+        }
+
+        /* En pantallas grandes (lg:), 4 columnas */
+        @media (min-width: 1024px) {
+            .envelope-container {
+                grid-template-columns: repeat(4, minmax(0, 1fr));
+                gap: 2rem;
+                /* Aumenta el espacio en pantallas grandes */
+            }
+        }
+
+        .envelope {
             position: relative;
-            /* Para posicionar las imágenes de forma absoluta */
-            max-width: 850px;
-            /* Ancho máximo ligeramente mayor */
-            width: 95%;
-            /* Ocupa casi todo el ancho disponible */
-            padding: 25px;
-            /* Relleno interno de la carta, ajustado para no scroll */
-            box-sizing: border-box;
-            /* Incluye padding y border en el ancho/alto */
+            width: 100%;
+            padding-bottom: 100%;
+            /* Para mantener una relación de aspecto cuadrada */
+            background-color: transparent;
+            /* El fondo del sobre es transparente para que se vea el emoji */
             border-radius: 15px;
-            /* Bordes más redondeados para un toque más suave */
-            overflow: hidden;
-            /* Asegura que las imágenes no se salgan del contenedor */
-            max-height: 98vh;
-            /* Limita la altura del contenedor para evitar scroll */
             display: flex;
-            /* Usamos flexbox para la pila vertical de contenido */
             flex-direction: column;
-            justify-content: space-between;
-            /* Distribuye el espacio entre los elementos */
-        }
-
-        /* Estilo para el título "Mi pulguita," */
-        .title-style {
-            font-family: 'Dancing Script', cursive;
-            /* Fuente script para el encabezado */
-            color: #7a0000;
-            /* Un rojo oscuro más intenso */
+            justify-content: center;
+            align-items: center;
             text-align: center;
-            margin-bottom: 1.2rem;
-            /* Margen inferior ligeramente mayor */
-            font-size: 4.2rem;
-            /* Tamaño de fuente aún más grande para destacar */
-            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.15);
-            /* Sombra de texto más pronunciada */
-            flex-shrink: 0;
-            /* Evita que el título se encoja */
-        }
-
-        /* Estilo para el contenedor del texto, sobre las imágenes */
-        .letter-text-overlay {
-            position: relative;
-            /* Para que el z-index funcione */
-            z-index: 2;
-            /* Asegura que el texto esté por encima de las imágenes */
-            background-color: rgba(255, 255, 255, 0.75);
-            /* Fondo semi-transparente para la legibilidad, ligeramente menos opaco */
-            padding: 20px;
-            /* Relleno para el texto */
-            border-radius: 10px;
-            /* Bordes redondeados para el fondo del texto */
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
-            /* Sombra sutil para el texto */
-            flex-grow: 1;
-            /* Permite que el texto ocupe el espacio disponible */
-            overflow-y: auto;
-            /* Permite scroll solo si el texto es excesivamente largo, pero intentamos evitarlo */
-            -webkit-overflow-scrolling: touch;
-            /* Suaviza el scroll en iOS */
-        }
-
-        /* Estilo para los párrafos de texto - ahora con fuente script */
-        .letter-text-overlay p {
-            font-family: 'Caveat', cursive;
-            /* Fuente script para el cuerpo del texto */
-            font-size: 1.6rem;
-            /* Tamaño de fuente más grande para la escritura a mano */
-            text-align: justify;
-            margin-bottom: 1rem;
-            /* Espacio entre párrafos */
-            line-height: 1.7;
-            /* Mayor interlineado para legibilidad con fuente script */
-            color: #3a3a3a;
-            /* Color de texto ligeramente más suave */
-        }
-
-        .letter-text-overlay p:last-child {
-            margin-bottom: 0;
-            /* No bottom margin after the last paragraph */
-        }
-
-        /* General style for background images - more fused */
-        .letter-image {
-            position: absolute;
-            /* Posicionamiento absoluto para free placement */
-            object-fit: cover;
-            /* Covers the area without distorting */
-            border-radius: 0;
-            /* No border-radius to blend more */
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            overflow: hidden;
+            /* Oculta el contenido que se desborda para la animación de la carta */
             box-shadow: none;
-            /* No shadow to blend more */
-            opacity: 0.25;
-            /* Mayor opacidad para que se noten más */
-            mix-blend-mode: multiply;
-            /* Blend mode for una integración profunda con el papel */
-            filter: grayscale(40%) sepia(20%) contrast(180%);
-            /* Menos desaturado, menos sepia, más contraste */
-            pointer-events: none;
-            /* Images won't be interactive to not interfere with text */
+            /* Por defecto, no hay sombra */
+        }
+
+        /* Sombra al pasar el cursor sobre cualquier sobre ABIERTO */
+        .envelope.open:hover {
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.25);
+            /* Sombra más pronunciada al pasar el cursor sobre un sobre abierto */
+            transform: rotate(-8deg) scale(1.03);
+            /* Más inclinado y un poco más grande al pasar el ratón */
+        }
+
+        .envelope-content {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+            /* Alinea el contenido al final (abajo) */
+            align-items: center;
+            box-sizing: border-box;
+            z-index: 3;
+            /* Para que el contenido (texto) esté por encima del emoji y la carta */
+            padding-bottom: 0.5rem;
+            /* Añade un poco de espacio desde la parte inferior (responsive) */
+        }
+
+        /* Estilo para los emojis - AHORA MUCHO MÁS GRANDES Y EN EL FONDO */
+        .envelope-icon {
+            font-size: 6rem;
+            /* Tamaño del emoji, para que ocupe gran parte del sobre */
+            line-height: 1;
+            /* Asegura que el emoji esté bien centrado verticalmente */
+            margin-bottom: 0;
+            /* Eliminamos el margen inferior */
+            position: absolute;
+            /* Posicionamiento absoluto para que ocupe todo el espacio */
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            /* Centramos el emoji */
             z-index: 1;
-            /* Ensures images are below text */
+            /* El emoji es la "cubierta" del sobre, por debajo de la carta */
+            pointer-events: none;
+            /* Asegura que el emoji no interfiera con los clics */
         }
 
-        /* Specific positions and rotations for each image (even larger and adjusted to cover more) */
-        #image1 {
-            top: -15%;
-            left: -25%;
-            width: 550px;
-            height: 550px;
-            transform: rotate(-25deg);
+        /* Estilo para el texto superpuesto */
+        .envelope-number,
+        .envelope-content p {
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.7), -1px -1px 2px rgba(0, 0, 0, 0.7);
+            /* Sombra para mejor legibilidad */
+            color: white;
+            /* Color de texto blanco para contraste */
+            font-weight: 600;
+            font-family: 'Caveat', cursive; /* Aplicado a los textos dentro del sobre */
         }
 
-        #image2 {
-            top: 0%;
-            right: -25%;
-            width: 570px;
-            height: 570px;
-            transform: rotate(22deg);
+        .envelope-number {
+            font-size: 1.8rem;
+            /* Tamaño de fuente responsive, más grande */
         }
 
-        #image3 {
-            bottom: -15%;
-            left: -20%;
-            width: 560px;
-            height: 560px;
-            transform: rotate(18deg);
+        .envelope-content p {
+            font-size: 1.2rem;
+            /* Tamaño de fuente responsive, más grande */
         }
 
-        #image4 {
-            bottom: -25%;
-            right: -30%;
-            width: 580px;
-            height: 580px;
-            transform: rotate(-20deg);
+
+        /* --- Estilos para sobres CERRADOS --- */
+        .envelope.closed {
+            cursor: default;
+            /* No es clickeable */
         }
 
-        /* Style for the signature - now matching title style */
-        .signature-style {
+        .envelope.closed .envelope-number {
+            color: white;
+            /* Color de texto blanco para sobres cerrados */
+        }
+
+        /* --- Estilos para sobres ABIERTOS --- */
+        .envelope.open {
+            transform: rotate(-5deg);
+            /* Ligeramente inclinado para indicar que está abierto */
+            cursor: pointer;
+            /* Es clickeable */
+        }
+
+        /* Estilo para el enlace dentro del sobre abierto */
+        .envelope.open .envelope-link {
+            display: block;
+            /* Asegura que ocupe todo el espacio del padre */
+            width: 100%;
+            height: 100%;
+            text-decoration: none;
+            color: inherit;
+            /* Hereda el color del texto del sobre */
+        }
+
+        /* Estilo para la carta que sale del sobre */
+        .letter-pull-out {
+            position: absolute;
+            width: 80%;
+            /* Ancho de la carta (responsive) */
+            height: 60%;
+            /* Altura de la carta (ajustado para que quepa mejor) */
+            background-color: #f8f8f8;
+            /* Color de papel ligeramente grisáceo */
+            background-image: linear-gradient(to bottom, #ddd 1px, transparent 1px);
+            /* Líneas sutiles */
+            background-size: 100% 20px;
+            /* Espaciado de las líneas */
+            border-radius: 5px;
+            z-index: 2;
+            /* Por encima del emoji, por debajo del texto */
+            top: 15%;
+            /* Posición donde el borde superior de la carta se alinea con la abertura del sobre */
+            left: 50%;
+            transform: translate(-50%, -100%);
+            /* Inicialmente empujado hacia arriba por su altura completa, oculto */
+            transition: transform 0.6s ease-out, opacity 0.3s ease, visibility 0s linear 0.3s;
+            /* Animación suave y transición de visibilidad */
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+            /* Sombra para la carta */
+            opacity: 0;
+            /* Inicialmente invisible */
+            visibility: hidden;
+            /* Inicialmente oculto */
+            padding: 10px;
+            /* Espacio para el texto dentro de la carta */
+            box-sizing: border-box;
+            color: #333;
+            /* Color del texto de la carta */
+            font-family: 'Caveat', cursive; /* Aplicado a la carta que sale del sobre */
+            font-size: 0.75rem;
+            /* Tamaño de fuente más pequeño para simular escritura */
+            text-align: left;
+            /* Alineación del texto a la izquierda */
+            line-height: 1.4;
+            /* Espaciado de línea para el texto */
+        }
+
+        /* Animación de la carta al pasar el cursor */
+        .envelope.open:hover .letter-pull-out {
+            transform: translate(-50%, 0%);
+            /* Se desliza hacia abajo hasta su posición 'top: 15%' */
+            opacity: 1;
+            /* Se vuelve visible */
+            visibility: visible;
+            /* Se vuelve visible */
+            transition-delay: 0s;
+            /* Elimina el retraso de visibilidad al entrar */
+        }
+
+        .header-text {
             font-family: 'Dancing Script', cursive;
-            /* Script font for the signature */
-            font-size: 4.2rem;
-            /* Tamaño de fuente igual al título */
-            text-align: right;
-            margin-top: 1.2rem;
-            /* Top margin to separate from the letter body */
+            /* Fuente script para el encabezado, similar a los títulos de carta */
             color: #7a0000;
-            /* Color de texto más intenso, ahora rojo */
+            /* Un rojo oscuro más intenso, similar a los títulos de carta */
+            font-size: 3.5rem;
+            /* Tamaño de fuente ajustado para el título principal */
+            font-weight: 700;
+            margin-bottom: 2rem;
+            /* Margen inferior responsive */
+            text-align: center;
+            width: 100%;
             text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.15);
-            /* Sombra de texto igual al título */
-            flex-shrink: 0;
-            /* Prevents the signature from shrinking */
+            /* Sombra de texto similar a los títulos de carta */
         }
 
-        /* Media queries for responsiveness */
+        /* Media queries para responsividad */
         @media (max-width: 768px) {
-            .letter-container {
-                padding: 15px;
+            .header-text {
+                font-size: 2.5rem;
+                /* Tamaño de fuente más pequeño para el título en tabletas */
+                margin-bottom: 1.5rem;
             }
 
-            .title-style {
-                font-size: 3.5rem;
-                margin-bottom: 0.8rem;
+            .envelope-icon {
+                font-size: 5rem;
+                /* Emoji más pequeño en tabletas */
             }
 
-            .letter-text-overlay {
-                padding: 12px;
+            .envelope-number {
+                font-size: 1.4rem; /* Ajustado para tabletas */
             }
 
-            .letter-text-overlay p {
-                font-size: 1.3rem;
-                /* Adjust font size for mobile script font */
-                margin-bottom: 0.6rem;
+            .envelope-content p {
+                font-size: 1rem; /* Ajustado para tabletas */
             }
 
-            .letter-image {
-                width: 350px;
-                /* Smaller images on mobile */
-                height: 350px;
-                opacity: 0.15;
-            }
-
-            /* Adjust image positions for small screens */
-            #image1 {
-                top: -18%;
-                left: -30%;
-                width: 320px;
-                height: 320px;
-                transform: rotate(-20deg);
-            }
-
-            #image2 {
-                top: -5%;
-                right: -30%;
-                width: 340px;
-                height: 340px;
-                transform: rotate(25deg);
-            }
-
-            #image3 {
-                bottom: -18%;
-                left: -25%;
-                width: 330px;
-                height: 330px;
-                transform: rotate(18deg);
-            }
-
-            #image4 {
-                bottom: -25%;
-                right: -35%;
-                width: 350px;
-                height: 350px;
-                transform: rotate(-22deg);
-            }
-
-            .signature-style {
-                font-size: 3.5rem;
-                /* Tamaño de fuente igual al título en móvil */
-                margin-top: 0.8rem;
+            .letter-pull-out {
+                width: 85%;
+                /* Ancho de la carta ajustado para tabletas */
+                height: 65%;
+                /* Altura de la carta ajustada para tabletas */
+                font-size: 0.7rem;
             }
         }
 
         @media (max-width: 480px) {
-            .letter-container {
-                padding: 10px;
+            .header-text {
+                font-size: 2rem;
+                /* Tamaño de fuente aún más pequeño para el título en móviles */
+                margin-bottom: 1rem;
             }
 
-            .title-style {
-                font-size: 2.8rem;
-                margin-bottom: 0.6rem;
+            .envelope-container {
+                grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+                /* 2 columnas en móviles pequeños */
+                gap: 0.8rem;
             }
 
-            .letter-text-overlay {
+            .envelope-icon {
+                font-size: 4rem;
+                /* Emoji más pequeño en móviles */
+            }
+
+            .envelope-number {
+                font-size: 1.2rem; /* Ajustado para móviles */
+            }
+
+            .envelope-content p {
+                font-size: 0.9rem; /* Ajustado para móviles */
+            }
+
+            .letter-pull-out {
+                width: 90%;
+                /* Ancho de la carta ajustado para móviles */
+                height: 70%;
+                /* Altura de la carta ajustada para móviles */
+                font-size: 0.65rem;
                 padding: 8px;
-            }
-
-            .letter-text-overlay p {
-                font-size: 1.1rem;
-                margin-bottom: 0.5rem;
-            }
-
-            .letter-image {
-                width: 250px;
-                height: 250px;
-            }
-
-            /* Adjust image positions for very small screens */
-            #image1 {
-                top: -20%;
-                left: -35%;
-                width: 230px;
-                height: 230px;
-                transform: rotate(-18deg);
-            }
-
-            #image2 {
-                top: -10%;
-                right: -35%;
-                width: 250px;
-                height: 250px;
-                transform: rotate(22deg);
-            }
-
-            #image3 {
-                bottom: -20%;
-                left: -30%;
-                width: 240px;
-                height: 240px;
-                transform: rotate(15deg);
-            }
-
-            #image4 {
-                bottom: -25%;
-                right: -40%;
-                width: 260px;
-                height: 260px;
-                transform: rotate(-20deg);
-            }
-
-            .signature-style {
-                font-size: 2.8rem;
-                /* Tamaño de fuente igual al título en móvil */
-                margin-top: 0.6rem;
-            }
-
-            .signature-style p{
-                color: #7a0000 !important;
             }
         }
     </style>
 </head>
 
-<body>
-    <div class="letter-container">
-        <h1 class="title-style">Mi pulguita,</h1>
+<body class="flex flex-col items-center justify-center min-h-screen p-4">
+    <h1 class="header-text">Nuestra Historia de Amor en Cartas</h1>
 
-        <div class="letter-text-overlay">
-
-            <p>Hoy no es solo el día en que cumplimos dos meses juntos; hoy miro hacia atrás y mi corazón se llena de
-                gratitud por cada momento a tu lado. Ha sido un regalo, una confirmación de que el amor es mucho más de
-                lo que alguna vez imaginé.</p>
-
-            <p>Contigo, he aprendido que el amor no duele, que el amor genera paz y que, sobre todo, el amor sana. Has
-                llegado a mi vida para demostrarme que existe una conexión profunda y hermosa, capaz de transformar cada
-                día en algo extraordinario.</p>
-
-            <p>Cuando te miro, sigo viendo <span class="font-bold">magia</span>. Eres esa luz que ilumina mi mundo,
-                la fuerza que me impulsa y la calma que me envuelve. No hay duda de que eres la mujer que tantas veces
-                visualicé, que tantas veces pedí a Dios. Deseo con toda mi alma seguir compartiendo cada paso, cada
-                risa, cada sueño y cada aprendizaje contigo. Crecer a tu lado es la aventura más hermosa que he podido
-                emprender.</p>
-
+    <div class="envelope-container">
+        <div class="envelope open rounded-xl">
+            <a href="pages/san_valentin.html" class="envelope-link">
+                <div class="envelope-content">
+                    <span class="envelope-icon">💌</span>
+                    <div class="letter-pull-out">
+                        <p>Mi amor, cada momento contigo es un sueño. Te amo con todo mi corazón.</p>
+                    </div>
+                    <span class="envelope-number">Carta 1</span>
+                    <p class="text-sm">Nuestro Primer San valentin</p>
+                </div>
+            </a>
         </div>
-            <p class="signature-style">Te amo con todo mi ser.</p>
 
-        <img id="image1" src="unnamed.jpg" alt="[Image of a couple embracing in an antique garden]"
-            class="letter-image">
+        <div class="envelope open rounded-xl">
+            <a href="pages/mes_1.html" class="envelope-link">
+                <div class="envelope-content">
+                    <span class="envelope-icon">💌</span>
+                    <div class="letter-pull-out">
+                        <p>Recuerdo el día que nuestros caminos se cruzaron. Fue el inicio de algo mágico.</p>
+                    </div>
+                    <span class="envelope-number">Carta 2</span>
+                    <p class="text-sm">Aqui nacio nuestro apodo</p>
+                </div>
+            </a>
+        </div>
 
-        <img id="image2" src="unnamed_1.jpg" alt="[Image of a vintage rose with dew drops]" class="letter-image">
+        <div class="envelope open rounded-xl">
+            <a href="pages/mes_2.html" class="envelope-link">
+                <div class="envelope-content">
+                    <span class="envelope-icon">💌</span>
+                    <div class="letter-pull-out">
+                        <p>Cada risa, cada abrazo, cada desafío superado... nuestra historia es mi tesoro.</p>
+                    </div>
+                    <span class="envelope-number">Carta 3</span>
+                    <p class="text-sm">Por poco y no llegamos</p>
+                </div>
+            </a>
+        </div>
 
-        <img id="image3" src="unnamed_2.jpg" alt="[Image of intertwined hands with a blurred romantic background]"
-            class="letter-image">
+        <div class="envelope closed rounded-xl">
+            <div class="envelope-content">
+                <span class="envelope-icon">✉️</span>
+                <span class="envelope-number">Carta 4</span>
+                <p class="text-sm">¡Pronto la descubrirás!</p>
+            </div>
+        </div>
 
-        <img id="image4" src="unnamed_3.jpg" alt="[Image of a romantic sunset over a lake with a rowboat]"
-            class="letter-image">
+        <div class="envelope closed rounded-xl">
+            <div class="envelope-content">
+                <span class="envelope-icon">✉️</span>
+                <span class="envelope-number">Carta 5</span>
+                <p class="text-sm">¡La espera valdrá la pena!</p>
+            </div>
+        </div>
+
+        <div class="envelope closed rounded-xl">
+            <div class="envelope-content">
+                <span class="envelope-icon">✉️</span>
+                <span class="envelope-number">Carta 6</span>
+                <p class="text-sm">Un secreto por revelar</p>
+            </div>
+        </div>
+
+        <div class="envelope closed rounded-xl">
+            <div class="envelope-content">
+                <span class="envelope-icon">✉️</span>
+                <span class="envelope-number">Carta 7</span>
+                <p class="text-sm">Más recuerdos por compartir</p>
+            </div>
+        </div>
+
+        <div class="envelope closed rounded-xl">
+            <div class="envelope-content">
+                <span class="envelope-icon">✉️</span>
+                <span class="envelope-number">Carta 8</span>
+                <p class="text-sm">El gran final...</p>
+            </div>
+        </div>
     </div>
 </body>
 

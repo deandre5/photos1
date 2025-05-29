@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mi Pulguita - Una Carta de Amor</title>
+    <title>Una Carta del Mes 2</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link
         href="https://fonts.googleapis.com/css2?family=Caveat:wght@400;700&family=Dancing+Script:wght@400;700&display=swap"
@@ -21,10 +21,8 @@
             align-items: center;
             min-height: 100vh;
             /* Asegura que ocupe al menos la altura de la ventana */
-            padding: 10px;
+            padding: 1rem;
             /* Espaciado reducido alrededor de la carta */
-            overflow: hidden;
-            /* Evita el scroll en el body */
             box-sizing: border-box;
         }
 
@@ -40,20 +38,24 @@
             /* Sombra más profunda para darle más relieve */
             position: relative;
             /* Para posicionar las imágenes de forma absoluta */
-            max-width: 850px;
-            /* Ancho máximo ligeramente mayor */
+            max-width: 700px;
+            /* Ancho máximo consistente para todas las cartas */
             width: 95%;
             /* Ocupa casi todo el ancho disponible */
-            padding: 25px;
-            /* Relleno interno de la carta, ajustado para no scroll */
+            height: auto;
+            /* Permite que la altura se ajuste según el aspect-ratio */
+            aspect-ratio: 1 / 1.4;
+            /* Relación de aspecto consistente (ej. A4 vertical) */
+            min-height: 70vh;
+            /* Asegura una altura mínima en pantallas grandes */
+            padding: 2rem;
+            /* Relleno interno de la carta */
             box-sizing: border-box;
             /* Incluye padding y border en el ancho/alto */
             border-radius: 15px;
             /* Bordes más redondeados para un toque más suave */
             overflow: hidden;
             /* Asegura que las imágenes no se salgan del contenedor */
-            max-height: 98vh;
-            /* Limita la altura del contenedor para evitar scroll */
             display: flex;
             /* Usamos flexbox para la pila vertical de contenido */
             flex-direction: column;
@@ -68,10 +70,10 @@
             color: #7a0000;
             /* Un rojo oscuro más intenso */
             text-align: center;
-            margin-bottom: 1.2rem;
-            /* Margen inferior ligeramente mayor */
-            font-size: 4.2rem;
-            /* Tamaño de fuente aún más grande para destacar */
+            margin-bottom: 1rem;
+            /* Margen inferior ligeramente reducido */
+            font-size: 3.8rem;
+            /* Tamaño de fuente ligeramente reducido para más espacio */
             text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.15);
             /* Sombra de texto más pronunciada */
             flex-shrink: 0;
@@ -85,8 +87,8 @@
             z-index: 2;
             /* Asegura que el texto esté por encima de las imágenes */
             background-color: rgba(255, 255, 255, 0.75);
-            /* Fondo semi-transparente para la legibilidad, ligeramente menos opaco */
-            padding: 20px;
+            /* Fondo semi-transparente para la legibilidad */
+            padding: 1.5rem;
             /* Relleno para el texto */
             border-radius: 10px;
             /* Bordes redondeados para el fondo del texto */
@@ -95,7 +97,7 @@
             flex-grow: 1;
             /* Permite que el texto ocupe el espacio disponible */
             overflow-y: auto;
-            /* Permite scroll solo si el texto es excesivamente largo, pero intentamos evitarlo */
+            /* Permite scroll interno si el texto es excesivamente largo */
             -webkit-overflow-scrolling: touch;
             /* Suaviza el scroll en iOS */
         }
@@ -104,12 +106,12 @@
         .letter-text-overlay p {
             font-family: 'Caveat', cursive;
             /* Fuente script para el cuerpo del texto */
-            font-size: 1.6rem;
-            /* Tamaño de fuente más grande para la escritura a mano */
+            font-size: 1.4rem;
+            /* Tamaño de fuente ligeramente reducido */
             text-align: justify;
-            margin-bottom: 1rem;
-            /* Espacio entre párrafos */
-            line-height: 1.7;
+            margin-bottom: 0.8rem;
+            /* Espacio entre párrafos reducido */
+            line-height: 1.6;
             /* Mayor interlineado para legibilidad con fuente script */
             color: #3a3a3a;
             /* Color de texto ligeramente más suave */
@@ -120,31 +122,32 @@
             /* No bottom margin after the last paragraph */
         }
 
-        /* General style for background images - more fused */
+        /* Estilo general para las imágenes de fondo - más fusionadas */
         .letter-image {
             position: absolute;
-            /* Posicionamiento absoluto para free placement */
+            /* Posicionamiento absoluto para libre colocación */
             object-fit: cover;
-            /* Covers the area without distorting */
+            /* Cubre el área sin distorsionar */
             border-radius: 0;
-            /* No border-radius to blend more */
+            /* Sin border-radius para una mejor mezcla */
             box-shadow: none;
-            /* No shadow to blend more */
+            /* Sin sombra para una mejor mezcla */
             opacity: 0.25;
             /* Mayor opacidad para que se noten más */
             mix-blend-mode: multiply;
-            /* Blend mode for una integración profunda con el papel */
+            /* Modo de mezcla para una integración profunda con el papel */
             filter: grayscale(40%) sepia(20%) contrast(180%);
             /* Menos desaturado, menos sepia, más contraste */
             pointer-events: none;
-            /* Images won't be interactive to not interfere with text */
+            /* Las imágenes no serán interactivas para no interferir con el texto */
             z-index: 1;
-            /* Ensures images are below text */
+            /* Asegura que las imágenes estén debajo del texto */
         }
 
-        /* Specific positions and rotations for each image (even larger and adjusted to cover more) */
+        /* Posiciones y rotaciones específicas para cada imagen (tamaño original) */
         #image1 {
-            top: -15%;
+            top: -10%;
+            /* Ajustado para bajar la imagen */
             left: -25%;
             width: 550px;
             height: 550px;
@@ -152,7 +155,8 @@
         }
 
         #image2 {
-            top: 0%;
+            top: 5%;
+            /* Ajustado para bajar la imagen */
             right: -25%;
             width: 570px;
             height: 570px;
@@ -160,7 +164,8 @@
         }
 
         #image3 {
-            bottom: -15%;
+            bottom: -10%;
+            /* Ajustado para subir la imagen */
             left: -20%;
             width: 560px;
             height: 560px;
@@ -168,163 +173,244 @@
         }
 
         #image4 {
-            bottom: -25%;
+            bottom: -20%;
+            /* Ajustado para subir la imagen */
             right: -30%;
             width: 580px;
             height: 580px;
             transform: rotate(-20deg);
         }
 
-        /* Style for the signature - now matching title style */
+        /* Estilo para la firma - ahora coincidiendo con el estilo del título */
         .signature-style {
             font-family: 'Dancing Script', cursive;
-            /* Script font for the signature */
-            font-size: 4.2rem;
+            /* Fuente script para la firma */
+            font-size: 3.8rem;
             /* Tamaño de fuente igual al título */
             text-align: right;
-            margin-top: 1.2rem;
-            /* Top margin to separate from the letter body */
+            margin-top: 1rem;
+            /* Margen superior para separar del cuerpo de la carta */
             color: #7a0000;
             /* Color de texto más intenso, ahora rojo */
             text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.15);
             /* Sombra de texto igual al título */
             flex-shrink: 0;
-            /* Prevents the signature from shrinking */
+            /* Evita que la firma se encoja */
         }
 
-        /* Media queries for responsiveness */
+        /* Estilo para el botón de regresar */
+        .back-button {
+            display: block;
+            /* Hacerlo un elemento de bloque para centrar con margen automático */
+            margin: 1rem auto 0 auto;
+            /* Margen superior, margen horizontal automático para centrar */
+            padding: 0.6rem 1.2rem;
+            /* Relleno para el botón */
+            background-color: #a0522d;
+            /* Color siena para un aspecto cálido y envejecido */
+            color: #fff;
+            /* Texto blanco */
+            font-family: 'Caveat', cursive;
+            /* Coincide con la fuente del texto de la carta */
+            font-size: 1.1rem;
+            /* Tamaño de fuente legible */
+            border: none;
+            /* Sin borde */
+            border-radius: 8px;
+            /* Esquinas ligeramente redondeadas */
+            cursor: pointer;
+            /* Cursor de puntero al pasar el ratón */
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            /* Sombra sutil */
+            transition: background-color 0.3s ease, transform 0.2s ease;
+            /* Transiciones suaves */
+            text-decoration: none;
+            /* Eliminar subrayado para la etiqueta de anclaje si se usa */
+            text-align: center;
+            /* Centrar el texto dentro del botón */
+        }
+
+        .back-button:hover {
+            background-color: #8b4513;
+            /* Siena más oscuro al pasar el ratón */
+            transform: translateY(-2px);
+            /* Ligero efecto de elevación al pasar el ratón */
+        }
+
+        .back-button:active {
+            transform: translateY(0);
+            /* Efecto de presión */
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+            /* Sombra más pequeña al activar */
+        }
+
+        /* Estilo para las letras 'S' y 'A' que se iluminarán */
+        .highlight-char {
+            /* Estado inicial - sin brillo */
+            transition: text-shadow 0.6s ease-in-out, color 0.6s ease-in-out;
+        }
+
+        /* Estilo para el efecto de iluminación */
+        .highlight-char.glow-effect {
+            color: #FF0000;
+            /* Un color rojo vibrante para resaltar */
+            text-shadow:
+                0 0 5px #FF0000,
+                0 0 10px #FF0000,
+                0 0 15px #FF0000,
+                0 0 20px #FF3333;
+            /* Un brillo más intenso en rojo */
+        }
+
+        /* Media queries para ajustar el tamaño de la fuente y elementos en pantallas pequeñas */
         @media (max-width: 768px) {
+            body {
+                padding: 0.5rem;
+                /* Más espacio en los bordes para móviles */
+            }
+
             .letter-container {
-                padding: 15px;
+                padding: 1rem;
+                /* Relleno más pequeño en móviles */
             }
 
             .title-style {
-                font-size: 3.5rem;
-                margin-bottom: 0.8rem;
+                font-size: 3rem;
+                /* Ajustado para móviles */
+                margin-bottom: 0.6rem;
             }
 
             .letter-text-overlay {
-                padding: 12px;
+                padding: 1rem;
+                /* Relleno más pequeño en móviles */
             }
 
             .letter-text-overlay p {
-                font-size: 1.3rem;
-                /* Adjust font size for mobile script font */
+                font-size: 1.2rem;
+                /* Ajustado para móviles */
                 margin-bottom: 0.6rem;
             }
 
             .letter-image {
-                width: 350px;
-                /* Smaller images on mobile */
-                height: 350px;
                 opacity: 0.15;
+                /* Menor opacidad en móviles para no distraer */
             }
 
-            /* Adjust image positions for small screens */
+            /* Ajustar tamaño y posición de imágenes para pantallas pequeñas (768px) */
             #image1 {
-                top: -18%;
-                left: -30%;
-                width: 320px;
-                height: 320px;
+                top: -10%;
+                /* Ajustado para bajar más */
+                left: -25%;
+                width: 70%;
+                height: auto;
                 transform: rotate(-20deg);
             }
 
             #image2 {
                 top: -5%;
-                right: -30%;
-                width: 340px;
-                height: 340px;
+                /* Ajustado para bajar más */
+                right: -25%;
+                width: 72%;
+                height: auto;
                 transform: rotate(25deg);
             }
 
             #image3 {
-                bottom: -18%;
-                left: -25%;
-                width: 330px;
-                height: 330px;
+                bottom: -10%;
+                /* Ajustado para subir más */
+                left: -20%;
+                width: 71%;
+                height: auto;
                 transform: rotate(18deg);
             }
 
             #image4 {
-                bottom: -25%;
-                right: -35%;
-                width: 350px;
-                height: 350px;
+                bottom: -15%;
+                /* Ajustado para subir más */
+                right: -30%;
+                width: 73%;
+                height: auto;
                 transform: rotate(-22deg);
             }
 
             .signature-style {
-                font-size: 3.5rem;
+                font-size: 3rem;
                 /* Tamaño de fuente igual al título en móvil */
+                margin-top: 0.8rem;
+            }
+
+            .back-button {
+                font-size: 1rem;
+                padding: 0.5rem 1rem;
                 margin-top: 0.8rem;
             }
         }
 
         @media (max-width: 480px) {
             .letter-container {
-                padding: 10px;
+                padding: 0.8rem;
             }
 
             .title-style {
-                font-size: 2.8rem;
-                margin-bottom: 0.6rem;
+                font-size: 2.5rem;
+                margin-bottom: 0.4rem;
             }
 
             .letter-text-overlay {
-                padding: 8px;
+                padding: 0.8rem;
             }
 
             .letter-text-overlay p {
-                font-size: 1.1rem;
-                margin-bottom: 0.5rem;
+                font-size: 1rem;
+                margin-bottom: 0.4rem;
             }
 
-            .letter-image {
-                width: 250px;
-                height: 250px;
-            }
-
-            /* Adjust image positions for very small screens */
+            /* Ajustar tamaño y posición de imágenes para pantallas muy pequeñas (480px) */
             #image1 {
-                top: -20%;
-                left: -35%;
-                width: 230px;
-                height: 230px;
+                top: -15%;
+                /* Ajustado para bajar más */
+                left: -30%;
+                width: 80%;
+                height: auto;
                 transform: rotate(-18deg);
             }
 
             #image2 {
                 top: -10%;
-                right: -35%;
-                width: 250px;
-                height: 250px;
+                /* Ajustado para bajar más */
+                right: -30%;
+                width: 82%;
+                height: auto;
                 transform: rotate(22deg);
             }
 
             #image3 {
-                bottom: -20%;
-                left: -30%;
-                width: 240px;
-                height: 240px;
+                bottom: -15%;
+                /* Ajustado para subir más */
+                left: -25%;
+                width: 81%;
+                height: auto;
                 transform: rotate(15deg);
             }
 
             #image4 {
-                bottom: -25%;
-                right: -40%;
-                width: 260px;
-                height: 260px;
+                bottom: -20%;
+                /* Ajustado para subir más */
+                right: -35%;
+                width: 83%;
+                height: auto;
                 transform: rotate(-20deg);
             }
 
             .signature-style {
-                font-size: 2.8rem;
-                /* Tamaño de fuente igual al título en móvil */
+                font-size: 2.5rem;
                 margin-top: 0.6rem;
             }
 
-            .signature-style p{
-                color: #7a0000 !important;
+            .back-button {
+                font-size: 0.9rem;
+                padding: 0.4rem 0.8rem;
+                margin-top: 0.5rem;
             }
         }
     </style>
@@ -334,7 +420,7 @@
     <div class="letter-container">
         <h1 class="title-style">Mi pulguita,</h1>
 
-        <div class="letter-text-overlay">
+        <div class="letter-text-overlay" id="letterTextOverlay">
 
             <p>Hoy no es solo el día en que cumplimos dos meses juntos; hoy miro hacia atrás y mi corazón se llena de
                 gratitud por cada momento a tu lado. Ha sido un regalo, una confirmación de que el amor es mucho más de
@@ -344,26 +430,126 @@
                 llegado a mi vida para demostrarme que existe una conexión profunda y hermosa, capaz de transformar cada
                 día en algo extraordinario.</p>
 
-            <p>Cuando te miro, sigo viendo <span class="font-bold">magia</span>. Eres esa luz que ilumina mi mundo,
+            <p>Cuando te miro, sigo viendo magia. Eres esa luz que ilumina mi mundo,
                 la fuerza que me impulsa y la calma que me envuelve. No hay duda de que eres la mujer que tantas veces
                 visualicé, que tantas veces pedí a Dios. Deseo con toda mi alma seguir compartiendo cada paso, cada
                 risa, cada sueño y cada aprendizaje contigo. Crecer a tu lado es la aventura más hermosa que he podido
                 emprender.</p>
 
         </div>
-            <p class="signature-style">Te amo con todo mi ser.</p>
+        <p class="signature-style">Te amo con todo mi ser.</p>
 
-        <img id="image1" src="unnamed.jpg" alt="[Image of a couple embracing in an antique garden]"
+        <button onclick="history.back()" class="back-button">
+            Volver a la página anterior
+        </button>
+
+        <img id="image1" src="../images/unnamed.jpg" alt="[Image of a couple embracing in an antique garden]"
             class="letter-image">
 
-        <img id="image2" src="unnamed_1.jpg" alt="[Image of a vintage rose with dew drops]" class="letter-image">
-
-        <img id="image3" src="unnamed_2.jpg" alt="[Image of intertwined hands with a blurred romantic background]"
+        <img id="image2" src="../images/unnamed_1.jpg" alt="[Image of a vintage rose with dew drops]"
             class="letter-image">
 
-        <img id="image4" src="unnamed_3.jpg" alt="[Image of a romantic sunset over a lake with a rowboat]"
+        <img id="image3" src="../images/unnamed_2.jpg"
+            alt="[Image of intertwined hands with a blurred romantic background]" class="letter-image">
+
+        <img id="image4" src="../images/unnamed_3.jpg" alt="[Image of a romantic sunset over a lake with a rowboat]"
             class="letter-image">
     </div>
+
+    <script>
+        // Espera a que el DOM esté completamente cargado antes de ejecutar el script
+        document.addEventListener('DOMContentLoaded', function () {
+            // Obtiene el contenedor principal del texto de la carta
+            const letterTextOverlay = document.getElementById('letterTextOverlay');
+            // Selecciona todos los párrafos dentro del contenedor
+            const paragraphs = letterTextOverlay.querySelectorAll('p');
+
+            /**
+             * Envuelve los caracteres 'S' y 'A' (mayúsculas o minúsculas)
+             * con una etiqueta <span> que tiene la clase 'highlight-char'.
+             * @param {string} text El texto a procesar.
+             * @returns {string} El texto con los caracteres envueltos en <span>.
+             */
+            function wrapCharacters(text) {
+                // Utiliza una expresión regular para encontrar 'S' o 'A' (insensible a mayúsculas/minúsculas)
+                // y los envuelve en un span con la clase 'highlight-char'.
+                // '$1' se refiere al grupo capturado por la expresión regular (la letra S o A).
+                return text.replace(/([SA])/gi, '<span class="highlight-char">$1</span>');
+            }
+
+            // Itera sobre cada párrafo y aplica la función de envolver caracteres
+            paragraphs.forEach(p => {
+                // Actualiza el innerHTML del párrafo con el texto modificado
+                p.innerHTML = wrapCharacters(p.innerHTML);
+            });
+
+            // Establece un temporizador para añadir el efecto de brillo después de 10 segundos
+            setTimeout(() => {
+                // Selecciona todos los elementos con la clase 'highlight-char'
+                const highlightChars = document.querySelectorAll('.highlight-char');
+                // Itera sobre cada uno de ellos y añade la clase 'glow-effect'
+                highlightChars.forEach(char => {
+                    char.classList.add('glow-effect');
+                });
+            }, 10000); // 10000 milisegundos = 10 segundos
+
+            // Establece un temporizador para modificar el texto después de 1 minuto (60 segundos)
+            setTimeout(() => {
+                const letterTextOverlay = document.getElementById('letterTextOverlay');
+                // Limpia todo el contenido actual
+                letterTextOverlay.innerHTML = '';
+
+                // Crea un contenedor para las letras "TE CASA"
+                const finalLettersContainer = document.createElement('div');
+                // Aplica estilos para centrar las letras y darles un tamaño grande
+                finalLettersContainer.style.display = 'flex';
+                finalLettersContainer.style.justifyContent = 'center';
+                finalLettersContainer.style.alignItems = 'center';
+                finalLettersContainer.style.width = '100%';
+                finalLettersContainer.style.height = '100%'; // Asegura que ocupe la altura completa de su padre
+                finalLettersContainer.style.fontSize = '8rem'; // Letras muy grandes
+                finalLettersContainer.style.fontWeight = 'bold';
+                finalLettersContainer.style.color = '#3a3a3a'; // Vuelve al color de texto original
+                finalLettersContainer.style.gap = '40px'; // Espacio entre las letras
+
+                // Crea los spans para "T", "E", "C", "A", "S", "A"
+                const tSpan = document.createElement('span');
+                tSpan.textContent = 'T';
+
+                const eSpan = document.createElement('span');
+                eSpan.textContent = 'E ';
+
+                const cSpan = document.createElement('span');
+                cSpan.textContent = 'C';
+
+                const aSpan1 = document.createElement('span');
+                aSpan1.textContent = 'A';
+
+                const sSpan = document.createElement('span');
+                sSpan.textContent = 'S';
+
+                const aSpan2 = document.createElement('span');
+                aSpan2.textContent = 'A';
+
+                // Añade las letras al contenedor
+                finalLettersContainer.appendChild(tSpan);
+                finalLettersContainer.appendChild(eSpan);
+                finalLettersContainer.appendChild(cSpan);
+                finalLettersContainer.appendChild(aSpan1);
+                finalLettersContainer.appendChild(sSpan);
+                finalLettersContainer.appendChild(aSpan2);
+
+
+                // Añade el contenedor al overlay
+                letterTextOverlay.appendChild(finalLettersContainer);
+
+                // Asegúrate de que el letterTextOverlay permite que el finalLettersContainer se centre
+                letterTextOverlay.style.display = 'flex';
+                letterTextOverlay.style.justifyContent = 'center';
+                letterTextOverlay.style.alignItems = 'center';
+            }, 300000); // 60000 milisegundos = 1 minuto
+        });
+    </script>
 </body>
 
 </html>

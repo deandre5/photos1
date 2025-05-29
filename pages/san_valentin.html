@@ -1,0 +1,358 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Carta de San Valentín</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@400;700&family=Dancing+Script:wght@400;700&display=swap"
+        rel="stylesheet">
+    <style>
+        /* Estilos generales del cuerpo */
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #e0d8cc;
+            /* Un color de fondo más terroso para complementar la carta */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            padding: 1rem; /* Reducido el padding del body para más espacio */
+            box-sizing: border-box; /* Incluye padding y border en el ancho/alto */
+        }
+
+        /* Estilo para el título "Mi amor," */
+        .title-style {
+            font-family: 'Dancing Script', cursive;
+            /* Fuente script para el encabezado */
+            color: #7a0000;
+            /* Un rojo oscuro más intenso */
+            text-align: center;
+            margin-bottom: 0.8rem; /* Margen inferior ligeramente reducido */
+            font-size: 3.8rem; /* Tamaño de fuente ligeramente reducido para más espacio */
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.15);
+            /* Sombra de texto más pronunciada */
+            flex-shrink: 0;
+            /* Evita que el título se encoja */
+        }
+
+        /* Estilo para la firma */
+        .signature-style {
+            font-family: 'Dancing Script', cursive;
+            /* Fuente script para la firma (igual que el título) */
+            font-size: 3.8rem; /* Tamaño de fuente igual al título */
+            text-align: right;
+            margin-top: 0.8rem; /* Margen superior ligeramente reducido */
+            color: #7a0000;
+            /* Color de texto más intenso, ahora rojo */
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.15);
+            /* Sombra de texto sutil */
+            flex-shrink: 0;
+            /* Evita que la firma se encoja */
+        }
+
+        /* Estilo para el botón de regresar */
+        .back-button {
+            display: block;
+            margin: 1rem auto 0 auto; /* Margen superior reducido, centrado */
+            padding: 0.6rem 1.2rem; /* Padding ligeramente reducido */
+            background-color: #a0522d;
+            color: #fff;
+            font-family: 'Caveat', cursive;
+            font-size: 1.1rem; /* Fuente ligeramente más pequeña */
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            transition: background-color 0.3s ease, transform 0.2s ease;
+            text-decoration: none;
+            text-align: center;
+        }
+
+        .back-button:hover {
+            background-color: #8b4513;
+            transform: translateY(-2px);
+        }
+
+        .back-button:active {
+            transform: translateY(0);
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+        }
+
+        /* Contenedor principal de la carta */
+        .letter-container {
+            background-color: #f8f4ed;
+            padding: 2.5rem; /* Padding reducido para más espacio vertical */
+            max-width: 800px;
+            width: 100%;
+            position: relative;
+            line-height: 1.7;
+            color: #3d3d3d;
+            font-family: 'Caveat', cursive;
+            box-shadow:
+                inset 0 0 25px rgba(0, 0, 0, 0.10),
+                inset 8px 8px 20px rgba(0, 0, 0, 0.07),
+                inset -8px -8px 20px rgba(0, 0, 0, 0.07),
+                inset 15px 0px 30px rgba(0, 0, 0, 0.04),
+                inset -15px 0px 30px rgba(0, 0, 0, 0.04),
+                0 15px 30px rgba(0, 0, 0, 0.25);
+            border-radius: 15px;
+            transform: rotateZ(0.7deg);
+            filter: sepia(0.2) contrast(1.1) brightness(1.05);
+            background-image: url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAlIiB2aWV3Qm94PSIwIDAgMTAwIDEwMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KICA8ZmlsdGVlciBpZD0ibm9pc2UiPgogICAgPGZlVHVyYnVsZW5jZSB0eXBlPSJmcmFjdGFsTm9pc2UiIGJhc2VGcmVxdWVuY3k9IjAuNzUiIG51bU9jdGF2ZXM9IjIiIGNvbG9yQ29tcG9uZW50cz0ic0QiIHN0aXRjaFRpbGVzPSJzdGl0Y2giLz4KICAgIDxmZUNvbG9yTWF0cml4IHR5cGU9InNhdHVyYXRlIiB2YWx1ZXM9IjAiLz4KICAgIDxmZUNvbXBvc2l0ZSBpbj0iU291cmNlR3JhcGhpYyIgaW4yPSJ0ZXh0dXJlIiBvcGVyYXRvcj0ibGlnaHRlbiIgcmVzdWx0PSJub2lzZU91dCIvPgogIDwvZmlsdGVyPgogIDxyZWN0IHdpZHRoPSIxMDAlIiBoZWlnaHQ9IjEwMCUiIGZpbGw9IiNmOGY0ZWQiIGZpbHRlcj0idXJsKCNub2lzZSkiLz4KPC9zdmc+');
+            background-size: cover;
+            background-blend-mode: multiply;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            /* Se eliminó 'max-height: 98vh;' para permitir que el contenido se ajuste */
+        }
+
+        /* Pseudo-elemento para el efecto de quemado único y uniforme */
+        .letter-container::before {
+            content: '';
+            position: absolute;
+            z-index: -1;
+            pointer-events: none;
+            opacity: 0.9;
+            top: -15px;
+            left: -15px;
+            right: -15px;
+            bottom: -15px;
+            border-radius: 17px;
+            box-shadow:
+                0 0 20px 10px rgba(0, 0, 0, 0.5),
+                0 0 35px 18px rgba(40, 15, 0, 0.6);
+            filter: blur(0);
+            transform: rotateZ(0deg);
+        }
+
+        /* Estilo para el contenedor del texto, sobre las imágenes */
+        .letter-text-overlay {
+            position: relative;
+            z-index: 2;
+            background-color: rgba(255, 255, 255, 0.75);
+            padding: 15px; /* Padding reducido */
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+            flex-grow: 1;
+            overflow-y: hidden; /* Se cambió a hidden para evitar scroll interno si no es necesario */
+            -webkit-overflow-scrolling: touch;
+        }
+
+        /* Estilo para los párrafos de texto */
+        .letter-text-overlay p {
+            font-family: 'Caveat', cursive;
+            font-size: 1.4rem; /* Tamaño de fuente ligeramente reducido */
+            text-align: justify;
+            margin-bottom: 0.8rem; /* Espacio entre párrafos reducido */
+            line-height: 1.6; /* Interlineado ligeramente reducido */
+            color: #3a3a3a;
+        }
+
+        .letter-text-overlay p:last-child {
+            margin-bottom: 0;
+        }
+
+        /* Estilo para las letras 'T' y 'E' que se iluminarán */
+        .highlight-char {
+            /* Estado inicial - sin brillo */
+            transition: text-shadow 0.6s ease-in-out, color 0.6s ease-in-out;
+        }
+
+        /* Estilo para el efecto de iluminación */
+        .highlight-char.glow-effect {
+            color: #FF0000; /* Un color rojo vibrante para resaltar */
+            text-shadow:
+                0 0 5px #FF0000,
+                0 0 10px #FF0000,
+                0 0 15px #FF0000,
+                0 0 20px #FF3333; /* Un brillo más intenso en rojo */
+        }
+
+        /* Media queries para ajustar el tamaño de la fuente en pantallas pequeñas */
+        @media (max-width: 768px) {
+            body {
+                padding: 0.5rem; /* Más espacio en los bordes para móviles */
+            }
+            .letter-container {
+                padding: 1rem; /* Padding más pequeño en móviles */
+                font-size: 0.8rem;
+                border-radius: 8px;
+            }
+
+            .back-button {
+                font-size: 1rem;
+                padding: 0.5rem 1rem;
+                margin-top: 0.6rem;
+            }
+
+            .title-style {
+                font-size: 3rem; /* Ajustado para móviles */
+                margin-bottom: 0.5rem;
+            }
+
+            .letter-text-overlay {
+                padding: 10px; /* Padding más pequeño en móviles */
+            }
+
+            .letter-text-overlay p {
+                font-size: 1.2rem; /* Ajustado para móviles */
+                margin-bottom: 0.5rem;
+            }
+
+            .signature-style {
+                font-size: 3rem; /* Ajustado para móviles */
+                margin-top: 0.5rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .letter-container {
+                padding: 0.8rem;
+            }
+
+            .title-style {
+                font-size: 2.5rem;
+                margin-bottom: 0.4rem;
+            }
+
+            .letter-text-overlay {
+                padding: 6px;
+            }
+
+            .letter-text-overlay p {
+                font-size: 1rem;
+                margin-bottom: 0.4rem;
+            }
+
+            .signature-style {
+                font-size: 2.5rem;
+                margin-top: 0.4rem;
+            }
+
+            .back-button {
+                font-size: 0.9rem;
+                padding: 0.4rem 0.8rem;
+                margin-top: 0.5rem;
+            }
+        }
+    </style>
+</head>
+
+<body class="antialiased">
+    <div class="letter-container">
+        <h1 class="title-style">Mi amor,</h1>
+
+        <div class="letter-text-overlay" id="letterTextOverlay">
+            <p class="mb-4">
+                Siento mucho haber perdido la primera carta que te escribí. No recuerdo cada palabra, pero sí lo especial
+                que fue para mí. Recuerdo que me habías contado que te gustaban las series de época y me puse a investigar
+                cómo hacer cartas que parecieran antiguas. Quemé el papel varias veces y tardé una eternidad, casi me rindo
+                porque no me terminaban de convencer.
+            </p>
+            <p class="mb-4">
+                Después de mucho esfuerzo, por fin logré una carta que, aunque no era perfecta, reflejaba a la perfección lo
+                que siento por ti, lo que provocas en mí.
+            </p>
+            <p class="mb-4">
+                Mientras la escribía, y con el pasar del tiempo, me di cuenta de algo tan loco: siempre estuve enamorado de
+                ti. Desde el primer día en que te vi, durante esos meses que no nos vimos y ahora. Eres mi primer amor y
+                espero que el único. Tus besos me llenan completamente el alma y cuando estoy contigo siento que no necesito
+                nada más. Por ti me esfuerzo cada día, me he vuelto una mejor persona y, aunque peleemos a veces (bastante
+                últimamente), ni por un momento he pensado que abandonar el barco sea la mejor opción. Eres alguien a quien,
+                aunque viviera mil vidas más, volvería a conocer. Eres divertida, inteligente, capaz y hermosa. Tienes las
+                cualidades más increíbles que he visto en un ser humano. Cuando te veo, mi pecho se llena de felicidad, eres
+                y serás el motivo de mi sonrisa. Espero que la vida nos permita seguir disfrutando de esta aventura tan
+                bella.
+            </p>
+        </div>
+        <p class="signature-style">Con todo mi amor</p>
+
+        <button onclick="history.back()" class="back-button">
+            Volver a la página anterior
+        </button>
+    </div>
+
+    <script>
+        // Espera a que el DOM esté completamente cargado antes de ejecutar el script
+        document.addEventListener('DOMContentLoaded', function() {
+            // Obtiene el contenedor principal del texto de la carta
+            const letterTextOverlay = document.getElementById('letterTextOverlay');
+            // Selecciona todos los párrafos dentro del contenedor
+            const paragraphs = letterTextOverlay.querySelectorAll('p');
+
+            /**
+             * Envuelve los caracteres 'T' y 'E' (mayúsculas o minúsculas)
+             * con una etiqueta <span> que tiene la clase 'highlight-char'.
+             * @param {string} text El texto a procesar.
+             * @returns {string} El texto con los caracteres envueltos en <span>.
+             */
+            function wrapCharacters(text) {
+                // Utiliza una expresión regular para encontrar 'T' o 'E' (insensible a mayúsculas/minúsculas)
+                // y los envuelve en un span con la clase 'highlight-char'.
+                // '$1' se refiere al grupo capturado por la expresión regular (la letra T o E).
+                return text.replace(/([TE])/gi, '<span class="highlight-char">$1</span>');
+            }
+
+            // Itera sobre cada párrafo y aplica la función de envolver caracteres
+            paragraphs.forEach(p => {
+                // Actualiza el innerHTML del párrafo con el texto modificado
+                p.innerHTML = wrapCharacters(p.innerHTML);
+            });
+
+            // Establece un temporizador para añadir el efecto de brillo después de 10 segundos
+            setTimeout(() => {
+                // Selecciona todos los elementos con la clase 'highlight-char'
+                const highlightChars = document.querySelectorAll('.highlight-char');
+                // Itera sobre cada uno de ellos y añade la clase 'glow-effect'
+                highlightChars.forEach(char => {
+                    char.classList.add('glow-effect');
+                });
+            }, 10000); // 10000 milisegundos = 10 segundos
+
+            // Establece un temporizador para modificar el texto después de 1 minuto (60 segundos)
+            setTimeout(() => {
+                const letterTextOverlay = document.getElementById('letterTextOverlay');
+                // Limpia todo el contenido actual
+                letterTextOverlay.innerHTML = '';
+
+                // Crea un contenedor para las letras T y E
+                const finalLettersContainer = document.createElement('div');
+                // Aplica estilos para centrar las letras y darles un tamaño grande
+                finalLettersContainer.style.display = 'flex';
+                finalLettersContainer.style.justifyContent = 'center';
+                finalLettersContainer.style.alignItems = 'center';
+                finalLettersContainer.style.width = '100%';
+                finalLettersContainer.style.height = '100%'; // Asegura que ocupe la altura completa de su padre
+                finalLettersContainer.style.fontSize = '8rem'; // Letras muy grandes
+                finalLettersContainer.style.fontWeight = 'bold';
+                finalLettersContainer.style.color = '#3a3a3a'; // Vuelve al color de texto original
+                finalLettersContainer.style.gap = '40px'; // Espacio entre T y E
+
+                // Crea el span para la 'T'
+                const tSpan = document.createElement('span');
+                tSpan.textContent = 'T';
+
+                // Crea el span para la 'E'
+                const eSpan = document.createElement('span');
+                eSpan.textContent = 'E';
+
+                // Añade las letras al contenedor
+                finalLettersContainer.appendChild(tSpan);
+                finalLettersContainer.appendChild(eSpan);
+
+                // Añade el contenedor al overlay
+                letterTextOverlay.appendChild(finalLettersContainer);
+
+                // Asegúrate de que el letterTextOverlay permite que el finalLettersContainer se centre
+                letterTextOverlay.style.display = 'flex';
+                letterTextOverlay.style.justifyContent = 'center';
+                letterTextOverlay.style.alignItems = 'center';
+            }, 300000); // 60000 milisegundos = 1 minuto
+        });
+    </script>
+</body>
+
+</html>
