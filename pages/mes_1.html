@@ -9,23 +9,9 @@
     <link
         href="https://fonts.googleapis.com/css2?family=Caveat:wght@400;700&family=Dancing+Script:wght@400;700&display=swap"
         rel="stylesheet">
-    <style>
-        /* Estilo personalizado para el cuerpo y el contenedor de la carta */
-        body {
-            background-color: #f2e8d9;
-            /* Color beige más cálido para simular papel antiguo */
-            background-image: url('https://www.transparenttextures.com/patterns/cream-paper.png');
-            /* Textura de papel más pronunciada para el fondo del body */
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            min-height: 100vh;
-            /* Asegura que ocupe al menos la altura de la ventana */
-            padding: 1rem; /* Reducido el padding del body para más espacio */
-            /* Se eliminó 'overflow: hidden;' para permitir el scroll */
-            box-sizing: border-box;
-        }
+    <link rel="stylesheet" href="../media/styles.css">
 
+    <style>
         /* Estilo para el contenedor principal de la carta */
         .letter-container {
             background-color: #fffaf0;
@@ -42,7 +28,8 @@
             /* Ancho máximo ligeramente mayor */
             width: 95%;
             /* Ocupa casi todo el ancho disponible */
-            padding: 2rem; /* Relleno interno de la carta, ajustado para no scroll */
+            padding: 2rem;
+            /* Relleno interno de la carta, ajustado para no scroll */
             box-sizing: border-box;
             /* Incluye padding y border en el ancho/alto */
             border-radius: 15px;
@@ -52,184 +39,30 @@
             display: flex;
             /* Usamos flexbox para la pila vertical de contenido */
             flex-direction: column;
-            justify-content: space-between;
             /* Distribuye el espacio entre los elementos */
+            justify-content: space-between;
         }
 
-        /* Estilo para el título "Mi pulguita," */
-        .title-style {
-            font-family: 'Dancing Script', cursive;
-            /* Fuente script para el encabezado */
-            color: #7a0000;
-            /* Un rojo oscuro más intenso */
-            text-align: center;
-            margin-bottom: 1rem; /* Margen inferior ligeramente reducido */
-            font-size: 3.8rem; /* Tamaño de fuente ligeramente reducido para más espacio */
-            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.15);
-            /* Sombra de texto más pronunciada */
-            flex-shrink: 0;
-            /* Evita que el título se encoja */
-        }
 
-        /* Estilo para el contenedor del texto, sobre las imágenes */
-        .letter-text-overlay {
-            position: relative;
-            /* Para que el z-index funcione */
-            z-index: 2;
-            /* Asegura que el texto esté por encima de las imágenes */
-            background-color: rgba(255, 255, 255, 0.75);
-            /* Fondo semi-transparente para la legibilidad */
-            padding: 1.5rem; /* Relleno para el texto */
-            border-radius: 10px;
-            /* Bordes redondeados para el fondo del texto */
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
-            /* Sombra sutil para el texto */
-            flex-grow: 1;
-            /* Permite que el texto ocupe el espacio disponible */
-            overflow-y: hidden; /* Se cambió a hidden para evitar scroll interno */
-            -webkit-overflow-scrolling: touch;
-            /* Suaviza el scroll en iOS */
-        }
 
-        /* Estilo para los párrafos de texto - ahora con fuente script */
-        .letter-text-overlay p {
-            font-family: 'Caveat', cursive;
-            /* Fuente script para el cuerpo del texto */
-            font-size: 1.4rem; /* Tamaño de fuente ligeramente reducido */
-            text-align: justify;
-            margin-bottom: 0.8rem; /* Espacio entre párrafos reducido */
-            line-height: 1.6; /* Mayor interlineado para legibilidad con fuente script */
-            color: #3a3a3a;
-            /* Color de texto ligeramente más suave */
-        }
 
-        .letter-text-overlay p:last-child {
-            margin-bottom: 0;
-            /* No bottom margin after the last paragraph */
-        }
-
-        /* Estilo para la firma */
-        .signature-style {
-            font-family: 'Caveat', cursive;
-            /* Fuente script para la firma (igual que el cuerpo) */
-            font-size: 2.2rem; /* Tamaño de fuente ajustado para la firma */
-            text-align: right;
-            margin-top: 1rem; /* Margen superior para separar del cuerpo de la carta */
-            color: #7a0000;
-            /* Color de texto más intenso, ahora rojo */
-            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.15);
-            /* Sombra de texto sutil */
-            flex-shrink: 0;
-            /* Evita que la firma se encoja */
-        }
-
-        /* Estilo para el botón de regresar */
-        .back-button {
-            display: block;
-            margin: 1rem auto 0 auto; /* Margen superior reducido, centrado */
-            padding: 0.6rem 1.2rem; /* Padding ligeramente reducido */
-            background-color: #a0522d;
-            color: #fff;
-            font-family: 'Caveat', cursive;
-            font-size: 1.1rem; /* Fuente ligeramente más pequeña */
-            border: none;
-            border-radius: 8px;
-            cursor: pointer;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-            transition: background-color 0.3s ease, transform 0.2s ease;
-            text-decoration: none;
-            text-align: center;
-        }
-
-        .back-button:hover {
-            background-color: #8b4513;
-            transform: translateY(-2px);
-        }
-
-        .back-button:active {
-            transform: translateY(0);
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
-        }
-
-        /* Estilo para las letras 'C' y 'A' que se iluminarán */
-        .highlight-char {
-            /* Estado inicial - sin brillo */
-            transition: text-shadow 0.6s ease-in-out, color 0.6s ease-in-out;
-        }
-
-        /* Estilo para el efecto de iluminación */
-        .highlight-char.glow-effect {
-            color: #FF0000; /* Un color rojo vibrante para resaltar */
-            text-shadow:
-                0 0 5px #FF0000,
-                0 0 10px #FF0000,
-                0 0 15px #FF0000,
-                0 0 20px #FF3333; /* Un brillo más intenso en rojo */
-        }
 
         /* Media queries para ajustar el tamaño de la fuente en pantallas pequeñas */
         @media (max-width: 768px) {
             body {
-                padding: 0.5rem; /* Más espacio en los bordes para móviles */
+                padding: 0.5rem;
+                /* Más espacio en los bordes para móviles */
             }
+
             .letter-container {
-                padding: 1rem; /* Padding más pequeño en móviles */
-            }
-
-            .title-style {
-                font-size: 3rem; /* Ajustado para móviles */
-                margin-bottom: 0.6rem;
-            }
-
-            .letter-text-overlay {
-                padding: 1rem; /* Padding más pequeño en móviles */
-            }
-
-            .letter-text-overlay p {
-                font-size: 1.2rem; /* Ajustado para móviles */
-                margin-bottom: 0.6rem;
-            }
-
-            .signature-style {
-                font-size: 1.8rem; /* Ajustado para móviles */
-                margin-top: 0.8rem;
-            }
-
-            .back-button {
-                font-size: 1rem;
-                padding: 0.5rem 1rem;
-                margin-top: 0.8rem;
+                padding: 1rem;
+                /* Padding más pequeño en móviles */
             }
         }
 
         @media (max-width: 480px) {
             .letter-container {
                 padding: 0.8rem;
-            }
-
-            .title-style {
-                font-size: 2.5rem;
-                margin-bottom: 0.4rem;
-            }
-
-            .letter-text-overlay {
-                padding: 0.8rem;
-            }
-
-            .letter-text-overlay p {
-                font-size: 1rem;
-                margin-bottom: 0.4rem;
-            }
-
-            .signature-style {
-                font-size: 1.5rem;
-                margin-top: 0.6rem;
-            }
-
-            .back-button {
-                font-size: 0.9rem;
-                padding: 0.4rem 0.8rem;
-                margin-top: 0.5rem;
             }
         }
     </style>
@@ -239,17 +72,52 @@
     <div class="letter-container">
         <h1 class="title-style">Mi pulguita Hermosa,</h1>
 
+        <div id="imageCarousel" class="relative w-full max-w-xl mx-auto my-4 rounded-lg overflow-hidden shadow-lg">
+            <div class="carousel-images relative w-full h-64 md:h-80 lg:h-96">
+                <img src="../images/mes1/mes1.webp" alt="Imagen de Amor Mes 1 - 1" class="active">
+                <img src="../images/mes1/mes2.webp" alt="Imagen de Amor Mes 1 - 2">
+                <img src="../images/mes1/mes3.webp" alt="Imagen de Amor Mes 1 - 3">
+                <img src="../images/mes1/mes4.webp" alt="Imagen de Amor Mes 1 - 4">
+                <img src="../images/mes1/mes5.webp" alt="Imagen de Amor Mes 1 - 5">
+
+            </div>
+            <button id="prevBtn"
+                class="absolute top-1/2 left-2 -translate-y-1/2 bg-white bg-opacity-75 p-2 rounded-full shadow-md focus:outline-none z-10 cursor-pointer">
+                <svg class="w-6 h-6 text-gray-800" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                    xmlns="http://www.w3.org/2000/svg">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path>
+                </svg>
+            </button>
+            <button id="nextBtn"
+                class="absolute top-1/2 right-2 -translate-y-1/2 bg-white bg-opacity-75 p-2 rounded-full shadow-md focus:outline-none z-10 cursor-pointer">
+                <svg class="w-6 h-6 text-gray-800" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                    xmlns="http://www.w3.org/2000/svg">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+                </svg>
+            </button>
+            <div id="carouselDots"
+                class="carousel-dots absolute bottom-2 left-0 right-0 flex justify-center space-x-2 z-10">
+            </div>
+        </div>
+
         <div class="letter-text-overlay" id="letterTextOverlay">
-            <p>Ha pasado 1 mes desde que nos dimos esta oportunidad tan hermosa y 3 meses desde que te volví a ver. Parece que fue ayer cuando te vi por primera vez. Ese momento quedó grabado en mi mente.</p>
+            <p>Ha pasado 1 mes desde que nos dimos esta oportunidad tan hermosa y 3 meses desde que te volví a ver.
+                Parece que fue ayer cuando te vi por primera vez. Ese momento quedó grabado en mi mente.</p>
 
-            <p>Aunque la vida nos separó por un tiempo, ni un solo día dejaste de estar en mis pensamientos. Eras mi constante, ese recuerdo imborrable que me hacía suspirar.</p>
+            <p>Aunque la vida nos separó por un tiempo, ni un solo día dejaste de estar en mis pensamientos. Eras mi
+                constante, ese recuerdo imborrable que me hacía suspirar.</p>
 
-            <p>Tenerte de nuevo en mi vida me genera una alegría inmensa. Me prometí a mí mismo que no te dejaría ir sin darlo todo de mí, que trabajaría cada día para ser el hombre que te mereces porque tú eres alguien increíble: inteligente, fuerte, valiente y para mí la mujer más hermosa y maravillosa que mis ojos han visto.</p>
+            <p>Tenerte de nuevo en mi vida me genera una alegría inmensa. Me prometí a mí mismo que no te dejaría ir sin
+                darlo todo de mí, que trabajaría cada día para ser el hombre que te mereces porque tú eres alguien
+                increíble: inteligente, fuerte, valiente y para mí la mujer más hermosa y maravillosa que mis ojos han
+                visto.</p>
 
-            <p>Cuando estoy contigo el mundo se desvanece, solo somos tú y yo. Tu sonrisa tiene la calidez del sol y tu mirada... tu mirada es mi mayor tesoro.</p>
+            <p>Cuando estoy contigo el mundo se desvanece, solo somos tú y yo. Tu sonrisa tiene la calidez del sol y tu
+                mirada... tu mirada es mi mayor tesoro.</p>
 
             <p>Este último mes ha sido un regalo, un recordatorio constante de lo afortunado que soy de tenerte.</p>
-            <p>Gracias mi pulguita por estar a mi lado, por llenar mi vida de felicidad. Espero con ansias todos los meses, años y vidas que nos quedan por compartir. </p>
+            <p>Gracias mi pulguita por estar a mi lado, por llenar mi vida de felicidad. Espero con ansias todos los
+                meses, años y vidas que nos quedan por compartir. </p>
         </div>
         <p class="signature-style">Te amo mi pulguita aventurera.</p>
 
@@ -260,10 +128,108 @@
 
     <script>
         // Espera a que el DOM esté completamente cargado antes de ejecutar el script
-        document.addEventListener('DOMContentLoaded', function() {
-            // Obtiene el contenedor principal del texto de la carta
+        document.addEventListener('DOMContentLoaded', function () {
+            // --- Lógica del Carrusel de Imágenes ---
+            const carouselImagesContainer = document.querySelector('.carousel-images');
+            const images = carouselImagesContainer.querySelectorAll('img');
+            const prevBtn = document.getElementById('prevBtn');
+            const nextBtn = document.getElementById('nextBtn');
+            const carouselDotsContainer = document.getElementById('carouselDots');
+
+            let currentIndex = 0;
+            let autoSlideInterval;
+            const slideIntervalTime = 3000; // 3 segundos para el auto-deslizamiento
+
+            /**
+             * Muestra la imagen en el índice especificado y actualiza los puntos de paginación.
+             * @param {number} index El índice de la imagen a mostrar.
+             */
+            function showImage(index) {
+                // Oculta todas las imágenes y remueve la clase 'active'
+                images.forEach((img, i) => {
+                    img.classList.remove('active');
+                    // Remueve la clase 'active' de los puntos de paginación
+                    if (carouselDotsContainer.children[i]) {
+                        carouselDotsContainer.children[i].classList.remove('active');
+                    }
+                });
+
+                // Asegura que el índice esté dentro de los límites
+                if (index >= images.length) {
+                    currentIndex = 0;
+                } else if (index < 0) {
+                    currentIndex = images.length - 1;
+                } else {
+                    currentIndex = index;
+                }
+
+                // Muestra la imagen actual y añade la clase 'active'
+                images[currentIndex].classList.add('active');
+                // Añade la clase 'active' al punto de paginación correspondiente
+                if (carouselDotsContainer.children[currentIndex]) {
+                    carouselDotsContainer.children[currentIndex].classList.add('active');
+                }
+            }
+
+            /**
+             * Avanza a la siguiente imagen en el carrusel.
+             */
+            function nextImage() {
+                showImage(currentIndex + 1);
+            }
+
+            /**
+             * Retrocede a la imagen anterior en el carrusel.
+             */
+            function prevImage() {
+                showImage(currentIndex - 1);
+            }
+
+            /**
+             * Inicia el auto-deslizamiento del carrusel.
+             */
+            function startAutoSlide() {
+                autoSlideInterval = setInterval(nextImage, slideIntervalTime);
+            }
+
+            /**
+             * Detiene el auto-deslizamiento del carrusel.
+             */
+            function stopAutoSlide() {
+                clearInterval(autoSlideInterval);
+            }
+
+            // Genera los puntos de paginación dinámicamente
+            images.forEach((_, i) => {
+                const dot = document.createElement('div');
+                dot.classList.add('carousel-dot');
+                dot.addEventListener('click', () => {
+                    stopAutoSlide(); // Detiene el auto-deslizamiento al hacer clic en un punto
+                    showImage(i);
+                    startAutoSlide(); // Reinicia el auto-deslizamiento
+                });
+                carouselDotsContainer.appendChild(dot);
+            });
+
+            // Event listeners para los botones de navegación
+            prevBtn.addEventListener('click', () => {
+                stopAutoSlide(); // Detiene el auto-deslizamiento al hacer clic
+                prevImage();
+                startAutoSlide(); // Reinicia el auto-deslizamiento
+            });
+
+            nextBtn.addEventListener('click', () => {
+                stopAutoSlide(); // Detiene el auto-deslizamiento al hacer clic
+                nextImage();
+                startAutoSlide(); // Reinicia el auto-deslizamiento
+            });
+
+            // Muestra la primera imagen al cargar y comienza el auto-deslizamiento
+            showImage(currentIndex);
+            startAutoSlide();
+
+            // --- Lógica existente para el efecto de brillo de caracteres ---
             const letterTextOverlay = document.getElementById('letterTextOverlay');
-            // Selecciona todos los párrafos dentro del contenedor
             const paragraphs = letterTextOverlay.querySelectorAll('p');
 
             /**
@@ -273,48 +239,37 @@
              * @returns {string} El texto con los caracteres envueltos en <span>.
              */
             function wrapCharacters(text) {
-                // Utiliza una expresión regular para encontrar 'C' o 'A' (insensible a mayúsculas/minúsculas)
-                // y los envuelve en un span con la clase 'highlight-char'.
-                // '$1' se refiere al grupo capturado por la expresión regular (la letra C o A).
                 return text.replace(/([CA])/gi, '<span class="highlight-char">$1</span>');
             }
 
-            // Itera sobre cada párrafo y aplica la función de envolver caracteres
             paragraphs.forEach(p => {
-                // Actualiza el innerHTML del párrafo con el texto modificado
                 p.innerHTML = wrapCharacters(p.innerHTML);
             });
 
             // Establece un temporizador para añadir el efecto de brillo después de 10 segundos
             setTimeout(() => {
-                // Selecciona todos los elementos con la clase 'highlight-char'
                 const highlightChars = document.querySelectorAll('.highlight-char');
-                // Itera sobre cada uno de ellos y añade la clase 'glow-effect'
                 highlightChars.forEach(char => {
                     char.classList.add('glow-effect');
                 });
             }, 10000); // 10000 milisegundos = 10 segundos
 
-            // Establece un temporizador para modificar el texto después de 1 minuto (60 segundos)
+            // Establece un temporizador para modificar el texto después de 5 minutos (300 segundos)
             setTimeout(() => {
                 const letterTextOverlay = document.getElementById('letterTextOverlay');
-                // Limpia todo el contenido actual
                 letterTextOverlay.innerHTML = '';
 
-                // Crea un contenedor para las letras "TE CA"
                 const finalLettersContainer = document.createElement('div');
-                // Aplica estilos para centrar las letras y darles un tamaño grande
                 finalLettersContainer.style.display = 'flex';
                 finalLettersContainer.style.justifyContent = 'center';
                 finalLettersContainer.style.alignItems = 'center';
                 finalLettersContainer.style.width = '100%';
-                finalLettersContainer.style.height = '100%'; // Asegura que ocupe la altura completa de su padre
-                finalLettersContainer.style.fontSize = '8rem'; // Letras muy grandes
+                finalLettersContainer.style.height = '100%';
+                finalLettersContainer.style.fontSize = '8rem';
                 finalLettersContainer.style.fontWeight = 'bold';
-                finalLettersContainer.style.color = '#3a3a3a'; // Vuelve al color de texto original
-                finalLettersContainer.style.gap = '40px'; // Espacio entre las letras
+                finalLettersContainer.style.color = '#3a3a3a';
+                finalLettersContainer.style.gap = '40px';
 
-                // Crea los spans para "T", "E", "C", "A"
                 const tSpan = document.createElement('span');
                 tSpan.textContent = 'T';
 
@@ -327,20 +282,17 @@
                 const aSpan = document.createElement('span');
                 aSpan.textContent = 'A';
 
-                // Añade las letras al contenedor
                 finalLettersContainer.appendChild(tSpan);
                 finalLettersContainer.appendChild(eSpan);
                 finalLettersContainer.appendChild(cSpan);
                 finalLettersContainer.appendChild(aSpan);
 
-                // Añade el contenedor al overlay
                 letterTextOverlay.appendChild(finalLettersContainer);
 
-                // Asegúrate de que el letterTextOverlay permite que el finalLettersContainer se centre
                 letterTextOverlay.style.display = 'flex';
                 letterTextOverlay.style.justifyContent = 'center';
                 letterTextOverlay.style.alignItems = 'center';
-            }, 300000); // 60000 milisegundos = 1 minuto
+            }, 300000); // 300000 milisegundos = 5 minutos
         });
     </script>
 </body>
