@@ -42,9 +42,6 @@
             /* Se eliminó 'max-height: 98vh;' para permitir que el contenido se ajuste */
         }
 
-
-
-
         /* Media queries para ajustar el tamaño de la fuente en pantallas pequeñas */
         @media (max-width: 768px) {
 
@@ -136,166 +133,21 @@
             Volver a la página anterior
         </button>
     </div>
+    <script src="../media/scripts/carrousel.js"></script>
+
+    <script src="../media/scripts/textHighlights.js"></script>
 
     <script>
-        // Espera a que el DOM esté completamente cargado antes de ejecutar el script
         document.addEventListener('DOMContentLoaded', function () {
-            // --- Lógica del Carrusel de Imágenes ---
-            const carouselImagesContainer = document.querySelector('.carousel-images');
-            const images = carouselImagesContainer.querySelectorAll('img');
-            const prevBtn = document.getElementById('prevBtn');
-            const nextBtn = document.getElementById('nextBtn');
-            const carouselDotsContainer = document.getElementById('carouselDots');
-
-            let currentIndex = 0;
-            let autoSlideInterval;
-            const slideIntervalTime = 3000; // 3 segundos para el auto-deslizamiento
-
-            /**
-             * Muestra la imagen en el índice especificado y actualiza los puntos de paginación.
-             * @param {number} index El índice de la imagen a mostrar.
-             */
-            function showImage(index) {
-                // Oculta todas las imágenes y remueve la clase 'active'
-                images.forEach((img, i) => {
-                    img.classList.remove('active');
-                    // Remueve la clase 'active' de los puntos de paginación
-                    if (carouselDotsContainer.children[i]) {
-                        carouselDotsContainer.children[i].classList.remove('active');
-                    }
-                });
-
-                // Asegura que el índice esté dentro de los límites
-                if (index >= images.length) {
-                    currentIndex = 0;
-                } else if (index < 0) {
-                    currentIndex = images.length - 1;
-                } else {
-                    currentIndex = index;
-                }
-
-                // Muestra la imagen actual y añade la clase 'active'
-                images[currentIndex].classList.add('active');
-                // Añade la clase 'active' al punto de paginación correspondiente
-                if (carouselDotsContainer.children[currentIndex]) {
-                    carouselDotsContainer.children[currentIndex].classList.add('active');
-                }
-            }
-
-            /**
-             * Avanza a la siguiente imagen en el carrusel.
-             */
-            function nextImage() {
-                showImage(currentIndex + 1);
-            }
-
-            /**
-             * Retrocede a la imagen anterior en el carrusel.
-             */
-            function prevImage() {
-                showImage(currentIndex - 1);
-            }
-
-            /**
-             * Inicia el auto-deslizamiento del carrusel.
-             */
-            function startAutoSlide() {
-                autoSlideInterval = setInterval(nextImage, slideIntervalTime);
-            }
-
-            /**
-             * Detiene el auto-deslizamiento del carrusel.
-             */
-            function stopAutoSlide() {
-                clearInterval(autoSlideInterval);
-            }
-
-            // Genera los puntos de paginación dinámicamente
-            images.forEach((_, i) => {
-                const dot = document.createElement('div');
-                dot.classList.add('carousel-dot');
-                dot.addEventListener('click', () => {
-                    stopAutoSlide(); // Detiene el auto-deslizamiento al hacer clic en un punto
-                    showImage(i);
-                    startAutoSlide(); // Reinicia el auto-deslizamiento
-                });
-                carouselDotsContainer.appendChild(dot);
-            });
-
-            // Event listeners para los botones de navegación
-            prevBtn.addEventListener('click', () => {
-                stopAutoSlide(); // Detiene el auto-deslizamiento al hacer clic
-                prevImage();
-                startAutoSlide(); // Reinicia el auto-deslizamiento
-            });
-
-            nextBtn.addEventListener('click', () => {
-                stopAutoSlide(); // Detiene el auto-deslizamiento al hacer clic
-                nextImage();
-                startAutoSlide(); // Reinicia el auto-deslizamiento
-            });
-
-            // Muestra la primera imagen al cargar y comienza el auto-deslizamiento
-            showImage(currentIndex);
-            startAutoSlide();
-
-            // --- Lógica existente para el efecto de brillo de caracteres ---
-            const letterTextOverlay = document.getElementById('letterTextOverlay');
-            const paragraphs = letterTextOverlay.querySelectorAll('p');
-
-            /**
-             * Envuelve los caracteres 'T' y 'E' (mayúsculas o minúsculas)
-             * con una etiqueta <span> que tiene la clase 'highlight-char'.
-             * @param {string} text El texto a procesar.
-             * @returns {string} El texto con los caracteres envueltos en <span>.
-             */
-            function wrapCharacters(text) {
-                return text.replace(/([TE])/gi, '<span class="highlight-char">$1</span>');
-            }
-
-            paragraphs.forEach(p => {
-                p.innerHTML = wrapCharacters(p.innerHTML);
-            });
-
-            // Establece un temporizador para añadir el efecto de brillo después de 10 segundos
-            setTimeout(() => {
-                const highlightChars = document.querySelectorAll('.highlight-char');
-                highlightChars.forEach(char => {
-                    char.classList.add('glow-effect');
-                });
-            }, 10000); // 10000 milisegundos = 10 segundos
-
-            // Establece un temporizador para modificar el texto después de 5 minutos (300 segundos)
-            setTimeout(() => {
-                const letterTextOverlay = document.getElementById('letterTextOverlay');
-                letterTextOverlay.innerHTML = '';
-
-                const finalLettersContainer = document.createElement('div');
-                finalLettersContainer.style.display = 'flex';
-                finalLettersContainer.style.justifyContent = 'center';
-                finalLettersContainer.style.alignItems = 'center';
-                finalLettersContainer.style.width = '100%';
-                finalLettersContainer.style.height = '100%';
-                finalLettersContainer.style.fontSize = '8rem';
-                finalLettersContainer.style.fontWeight = 'bold';
-                finalLettersContainer.style.color = '#3a3a3a';
-                finalLettersContainer.style.gap = '40px';
-
-                const tSpan = document.createElement('span');
-                tSpan.textContent = 'T';
-
-                const eSpan = document.createElement('span');
-                eSpan.textContent = 'E';
-
-                finalLettersContainer.appendChild(tSpan);
-                finalLettersContainer.appendChild(eSpan);
-
-                letterTextOverlay.appendChild(finalLettersContainer);
-
-                letterTextOverlay.style.display = 'flex';
-                letterTextOverlay.style.justifyContent = 'center';
-                letterTextOverlay.style.alignItems = 'center';
-            }, 300000); // 300000 milisegundos = 5 minutos
+            // Llama a la función genérica con tus parámetros deseados
+            // Aquí 'SA' es tu variable (charactersToHighlight)
+            initializeCharacterHighlighting(
+                'letterTextOverlay', // ID del contenedor principal
+                'TE',                // Caracteres a resaltar (aquí 'SA')
+                10000,               // Retraso para el brillo (10 segundos)
+                300000,              // Retraso para el mensaje final (5 minutos)
+                'TE' // El mensaje final de la propuesta
+            );
         });
     </script>
 </body>

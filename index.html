@@ -56,7 +56,7 @@
             </a>
         </div>
 
-        <div class="envelope closed rounded-xl">
+        <div class="envelope closed rounded-xl" data-envelope-id="4">
             <div class="envelope-content">
                 <span class="envelope-icon">✉️</span>
                 <span class="envelope-number">Carta 4</span>
@@ -64,7 +64,7 @@
             </div>
         </div>
 
-        <div class="envelope closed rounded-xl">
+        <div class="envelope closed rounded-xl" data-envelope-id="5">
             <div class="envelope-content">
                 <span class="envelope-icon">✉️</span>
                 <span class="envelope-number">Carta 5</span>
@@ -72,7 +72,7 @@
             </div>
         </div>
 
-        <div class="envelope closed rounded-xl">
+        <div class="envelope closed rounded-xl" data-envelope-id="6">
             <div class="envelope-content">
                 <span class="envelope-icon">✉️</span>
                 <span class="envelope-number">Carta 6</span>
@@ -80,7 +80,7 @@
             </div>
         </div>
 
-        <div class="envelope closed rounded-xl">
+        <div class="envelope closed rounded-xl" data-envelope-id="7">
             <div class="envelope-content">
                 <span class="envelope-icon">✉️</span>
                 <span class="envelope-number">Carta 7</span>
@@ -88,7 +88,7 @@
             </div>
         </div>
 
-        <div class="envelope closed rounded-xl">
+        <div class="envelope closed rounded-xl" data-envelope-id="8">
             <div class="envelope-content">
                 <span class="envelope-icon">✉️</span>
                 <span class="envelope-number">Carta 8</span>
@@ -96,6 +96,22 @@
             </div>
         </div>
     </div>
+
+    <button id="mobileActivateButton" class="hidden-button">
+        Toca aquí para continuar la sorpresa
+    </button>
+
+    <div id="proposalModal" class="modal-overlay">
+        <div class="modal-content">
+            <p id="modalPrompt" class="modal-message">¡Introduce la contraseña para revelar el mensaje!</p>
+            <input type="password" id="passwordInput" class="password-input" placeholder="Contraseña">
+            <p id="errorMessage" class="error-message hidden">Contraseña incorrecta. Inténtalo de nuevo.</p>
+            <button id="submitPasswordButton" class="password-submit-button">Enviar</button>
+            <button id="closeModalButton" class="modal-close-button mt-4">Cerrar</button>
+        </div>
+    </div>
+
+    <script src="media/scripts/index.js"></script>
 </body>
 
 </html>

@@ -34,8 +34,6 @@ body {
     /* Padding responsive */
 }
 
-
-
 .envelope {
     position: relative;
     width: 100%;
@@ -463,19 +461,6 @@ body {
 
 /* Estilos específicos para el carrusel */
 .carousel-container {
-    position: relative;
-    width: 100%;
-    max-width: 500px;
-    /* Ancho máximo para el carrusel */
-    height: 250px;
-    /* Altura predeterminada del carrusel */
-    margin: 1rem auto;
-    /* Centrar y añadir margen */
-    border-radius: 8px;
-    overflow: hidden;
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
-    background-color: #f8f4ed;
-    /* Fondo sólido para el carrusel */
     z-index: 2;
     /* Asegura que esté por encima de las imágenes de fondo */
 }
@@ -656,12 +641,6 @@ body {
         padding: 0.5rem 1rem;
         margin-top: 0.8rem;
     }
-
-    /* Carousel adjustments for mobile */
-    .carousel-container {
-        height: 180px;
-        /* Altura más pequeña para móviles */
-    }
 }
 
 @media (max-width: 480px) {
@@ -762,12 +741,6 @@ body {
         padding: 0.4rem 0.8rem;
         margin-top: 0.5rem;
     }
-
-    /* Carousel adjustments for smaller mobile */
-    .carousel-container {
-        height: 150px;
-        /* Altura aún más pequeña para móviles pequeños */
-    }
 }
 
 /* En pantallas medianas (md:), 3 columnas */
@@ -785,5 +758,158 @@ body {
         grid-template-columns: repeat(4, minmax(0, 1fr));
         gap: 2rem;
         /* Aumenta el espacio en pantallas grandes */
+    }
+}
+
+/* Estilos para el modal del easter egg */
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.6);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s ease-in-out, visibility 0.3s ease-in-out;
+}
+
+.modal-overlay.show {
+    opacity: 1;
+    visibility: visible;
+}
+
+.modal-content {
+    background-color: #fff;
+    padding: 2.5rem;
+    border-radius: 1rem;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+    max-width: 500px;
+    text-align: center;
+    position: relative;
+    transform: translateY(-20px);
+    opacity: 0;
+    transition: transform 0.3s ease-in-out, opacity 0.3s ease-in-out;
+}
+
+.modal-overlay.show .modal-content {
+    transform: translateY(0);
+    opacity: 1;
+}
+
+.modal-message {
+    font-family: 'Dancing Script', cursive;
+    font-size: 1.5rem;
+    color: #374151;
+    margin-bottom: 1.5rem;
+    line-height: 1.6;
+}
+
+.modal-close-button {
+    background-color: #ef4444;
+    color: white;
+    padding: 0.75rem 1.5rem;
+    border: none;
+    border-radius: 0.5rem;
+    cursor: pointer;
+    font-size: 1rem;
+    transition: background-color 0.2s ease-in-out;
+}
+
+.modal-close-button:hover {
+    background-color: #ff0101;
+}
+
+/* Estilo para sobres cerrados al ser clicados (opcional, para feedback visual) */
+.envelope.closed.clicked {
+    background-color: #e0e7ff;
+    /* Un azul muy suave para indicar que fue clicado */
+    border-color: #a78bfa;
+    /* Borde morado suave */
+}
+
+/* Estilos para el campo de contraseña */
+.password-input {
+    width: 80%;
+    padding: 0.75rem;
+    margin-bottom: 1rem;
+    border: 1px solid #ccc;
+    border-radius: 0.5rem;
+    font-size: 1.25rem;
+    text-align: center;
+    font-family: 'Caveat', cursive;
+    /* Fuente para el input */
+}
+
+.password-submit-button {
+    background-color: #8b5cf6;
+    /* Un verde para el botón de enviar */
+    color: white;
+    padding: 0.75rem 1.5rem;
+    border: none;
+    border-radius: 0.5rem;
+    cursor: pointer;
+    font-size: 1rem;
+    transition: background-color 0.2s ease-in-out;
+}
+
+.password-submit-button:hover {
+    background-color: #45a049;
+}
+
+.error-message {
+    color: #ef4444;
+    /* Rojo para mensajes de error */
+    font-size: 0.9rem;
+    margin-top: 0.5rem;
+}
+
+.password-submit-button:hover {
+    background-color: #7c3aed;
+    /* Un morado ligeramente más oscuro al pasar el ratón */
+}
+
+#carouselImage2 .imageCarousel {
+    color: #333;
+}
+
+/* Estilos CSS para el botón de activación (visible solo en móviles si JS lo muestra) */
+#mobileActivateButton {
+    display: none;
+    background-color: #8b5cf6;
+    color: white;
+    padding: 0.75rem 1.5rem;
+    border: none;
+    border-radius: 0.5rem;
+    cursor: pointer;
+    font-size: 1rem;
+    transition: background-color 0.2s ease-in-out, opacity 0.3s ease-in-out;
+
+    position: fixed;
+    bottom: -1rem;
+    /* <--- AJUSTA ESTE VALOR PARA MOVERLO MÁS ABAJO */
+    left: 50%;
+    transform: translateX(-50%);
+    white-space: nowrap;
+    z-index: 1000;
+
+    opacity: 0;
+    pointer-events: none;
+}
+
+/* Media Query: SOLO aplica estilos a este botón cuando la pantalla es de móvil */
+@media (max-width: 768px) {
+    #mobileActivateButton {
+        display: block;
+    }
+
+    /* Cuando la clase 'show-mobile-button' es añadida por JavaScript (después de clic en sobres) */
+    #mobileActivateButton.show-mobile-button {
+        opacity: 1;
+        pointer-events: auto;
     }
 }

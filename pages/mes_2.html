@@ -17,25 +17,30 @@
     <div class="letter-container">
         <h1 class="title-style">Mi pulguita Hermosa,</h1>
 
-        <div id="imageCarouselMonth2" class="carousel-container">
-            <div class="carousel-images">
+        <div id="imageCarousel"
+            class="relative w-full max-w-xl mx-auto my-4 rounded-lg overflow-hidden shadow-lg carousel-container">
+            <div class="carousel-images relative w-full h-64 md:h-80 lg:h-96">
                 <img src="../images/mes2/mes1.webp" alt="[Image of a romantic sunset]" class="active">
                 <img id="carouselImage2" src="../images/mes2/mes2.webp" alt="[Image of a couple walking hand in hand]">
                 <img src="../images/mes2/mes4.webp" alt="[Image of two coffee cups with hearts]">
             </div>
-            <button id="prevBtnMonth2" class="carousel-button left">
+            <button id="prevBtn"
+                class="absolute top-1/2 left-2 -translate-y-1/2 bg-white bg-opacity-75 p-2 rounded-full shadow-md focus:outline-none z-10 cursor-pointer">
                 <svg class="w-6 h-6 text-gray-800" fill="none" stroke="currentColor" viewBox="0 0 24 24"
                     xmlns="http://www.w3.org/2000/svg">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path>
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7">
+                    </path>
                 </svg>
             </button>
-            <button id="nextBtnMonth2" class="carousel-button right">
+            <button id="nextBtn"
+                class="absolute top-1/2 right-2 -translate-y-1/2 bg-white bg-opacity-75 p-2 rounded-full shadow-md focus:outline-none z-10 cursor-pointer">
                 <svg class="w-6 h-6 text-gray-800" fill="none" stroke="currentColor" viewBox="0 0 24 24"
                     xmlns="http://www.w3.org/2000/svg">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
                 </svg>
             </button>
-            <div id="carouselDotsMonth2" class="carousel-dot-container">
+            <div id="carouselDots"
+                class="carousel-dots absolute bottom-2 left-0 right-0 flex justify-center space-x-2 z-10">
             </div>
         </div>
 
@@ -74,183 +79,21 @@
             class="letter-image">
     </div>
 
+    <script src="../media/scripts/carrousel.js"></script>
+
+    <script src="../media/scripts/textHighlights.js"></script>
+
     <script>
-        // Espera a que el DOM esté completamente cargado antes de ejecutar el script
         document.addEventListener('DOMContentLoaded', function () {
-            // --- Lógica del Carrusel de Imágenes ---
-            const carouselContainer = document.getElementById('imageCarouselMonth2');
-            const carouselImagesContainer = carouselContainer.querySelector('.carousel-images');
-            const images = carouselImagesContainer.querySelectorAll('img');
-            const prevBtn = document.getElementById('prevBtnMonth2');
-            const nextBtn = document.getElementById('nextBtnMonth2');
-            const carouselDotsContainer = document.getElementById('carouselDotsMonth2');
-
-            let currentIndex = 0;
-            let autoSlideInterval;
-            const slideIntervalTime = 3000; // 3 segundos para el auto-deslizamiento
-
-            /**
-             * Muestra la imagen en el índice especificado y actualiza los puntos de paginación.
-             * @param {number} index El índice de la imagen a mostrar.
-             */
-            function showImage(index) {
-                // Oculta todas las imágenes y remueve la clase 'active'
-                images.forEach((img, i) => {
-                    img.classList.remove('active');
-                    // Remueve la clase 'active' de los puntos de paginación
-                    if (carouselDotsContainer.children[i]) {
-                        carouselDotsContainer.children[i].classList.remove('active');
-                    }
-                });
-
-                // Asegura que el índice esté dentro de los límites
-                if (index >= images.length) {
-                    currentIndex = 0;
-                } else if (index < 0) {
-                    currentIndex = images.length - 1;
-                } else {
-                    currentIndex = index;
-                }
-
-                // Muestra la imagen actual y añade la clase 'active'
-                images[currentIndex].classList.add('active');
-                // Añade la clase 'active' al punto de paginación correspondiente
-                if (carouselDotsContainer.children[currentIndex]) {
-                    carouselDotsContainer.children[currentIndex].classList.add('active');
-                }
-            }
-
-            /**
-             * Avanza a la siguiente imagen en el carrusel.
-             */
-            function nextImage() {
-                showImage(currentIndex + 1);
-            }
-
-            /**
-             * Retrocede a la imagen anterior en el carrusel.
-             */
-            function prevImage() {
-                showImage(currentIndex - 1);
-            }
-
-            /**
-             * Inicia el auto-deslizamiento del carrusel.
-             */
-            function startAutoSlide() {
-                stopAutoSlide(); // Asegura que no haya múltiples intervalos
-                autoSlideInterval = setInterval(nextImage, slideIntervalTime);
-            }
-
-            /**
-             * Detiene el auto-deslizamiento del carrusel.
-             */
-            function stopAutoSlide() {
-                clearInterval(autoSlideInterval);
-            }
-
-            // Genera los puntos de paginación dinámicamente
-            images.forEach((_, i) => {
-                const dot = document.createElement('div');
-                dot.classList.add('carousel-dot');
-                dot.addEventListener('click', () => {
-                    stopAutoSlide(); // Detiene el auto-deslizamiento al hacer clic en un punto
-                    showImage(i);
-                    startAutoSlide(); // Reinicia el auto-deslizamiento
-                });
-                carouselDotsContainer.appendChild(dot);
-            });
-
-            // Event listeners para los botones de navegación
-            prevBtn.addEventListener('click', () => {
-                stopAutoSlide(); // Detiene el auto-deslizamiento al hacer clic
-                prevImage();
-                startAutoSlide(); // Reinicia el auto-deslizamiento
-            });
-
-            nextBtn.addEventListener('click', () => {
-                stopAutoSlide(); // Detiene el auto-deslizamiento al hacer clic
-                nextImage();
-                startAutoSlide(); // Reinicia el auto-deslizamiento
-            });
-
-            // Muestra la primera imagen al cargar y comienza el auto-deslizamiento
-            showImage(currentIndex);
-            startAutoSlide();
-
-            // --- Lógica existente para el efecto de brillo de caracteres ---
-            const letterTextOverlay = document.getElementById('letterTextOverlay');
-            const paragraphs = letterTextOverlay.querySelectorAll('p');
-
-            /**
-             * Envuelve los caracteres 'S' y 'A' (mayúsculas o minúsculas)
-             * con una etiqueta <span> que tiene la clase 'highlight-char'.
-             * @param {string} text El texto a procesar.
-             * @returns {string} El texto con los caracteres envueltos en <span>.
-             */
-            function wrapCharacters(text) {
-                return text.replace(/([SA])/gi, '<span class="highlight-char">$1</span>');
-            }
-
-            paragraphs.forEach(p => {
-                p.innerHTML = wrapCharacters(p.innerHTML);
-            });
-
-            // Establece un temporizador para añadir el efecto de brillo después de 10 segundos
-            setTimeout(() => {
-                const highlightChars = document.querySelectorAll('.highlight-char');
-                highlightChars.forEach(char => {
-                    char.classList.add('glow-effect');
-                });
-            }, 10000); // 10000 milisegundos = 10 segundos
-
-            // Establece un temporizador para modificar el texto después de 5 minutos (300 segundos)
-            setTimeout(() => {
-                const letterTextOverlay = document.getElementById('letterTextOverlay');
-                letterTextOverlay.innerHTML = '';
-
-                const finalLettersContainer = document.createElement('div');
-                finalLettersContainer.style.display = 'flex';
-                finalLettersContainer.style.justifyContent = 'center';
-                finalLettersContainer.style.alignItems = 'center';
-                finalLettersContainer.style.width = '100%';
-                finalLettersContainer.style.height = '100%';
-                finalLettersContainer.style.fontSize = '8rem';
-                finalLettersContainer.style.fontWeight = 'bold';
-                finalLettersContainer.style.color = '#3a3a3a';
-                finalLettersContainer.style.gap = '40px';
-
-                const tSpan = document.createElement('span');
-                tSpan.textContent = 'T';
-
-                const eSpan = document.createElement('span');
-                eSpan.textContent = 'E ';
-
-                const cSpan = document.createElement('span');
-                cSpan.textContent = 'C';
-
-                const aSpan1 = document.createElement('span');
-                aSpan1.textContent = 'A';
-
-                const sSpan = document.createElement('span');
-                sSpan.textContent = 'S';
-
-                const aSpan2 = document.createElement('span');
-                aSpan2.textContent = 'A';
-
-                finalLettersContainer.appendChild(tSpan);
-                finalLettersContainer.appendChild(eSpan);
-                finalLettersContainer.appendChild(cSpan);
-                finalLettersContainer.appendChild(aSpan1);
-                finalLettersContainer.appendChild(sSpan);
-                finalLettersContainer.appendChild(aSpan2);
-
-                letterTextOverlay.appendChild(finalLettersContainer);
-
-                letterTextOverlay.style.display = 'flex';
-                letterTextOverlay.style.justifyContent = 'center';
-                letterTextOverlay.style.alignItems = 'center';
-            }, 300000); // 300000 milisegundos = 5 minutos
+            // Llama a la función genérica con tus parámetros deseados
+            // Aquí 'SA' es tu variable (charactersToHighlight)
+            initializeCharacterHighlighting(
+                'letterTextOverlay', // ID del contenedor principal
+                'SA',                // Caracteres a resaltar (aquí 'SA')
+                10000,               // Retraso para el brillo (10 segundos)
+                300000,              // Retraso para el mensaje final (5 minutos)
+                'TE CASA' // El mensaje final de la propuesta
+            );
         });
     </script>
 </body>
